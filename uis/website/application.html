@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Brasa Points | Brasaland Loyalty Program</title>
+  <meta name="description" content="Register for Brasa Points digital loyalty. Earn points at any of our 14 Brasaland locations.">
+  <link rel="canonical" href="https://brasaland.com/application.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Join Brasa Points | Brasaland Loyalty Program">
+  <meta property="og:description" content="Register for Brasa Points digital loyalty. Earn points at any of our 14 Brasaland locations.">
+  <meta property="og:url" content="https://brasaland.com/application.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1544025162-d76694265947?w=1200&amp;h=630&amp;fit=crop">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="es_CO">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-50 text-stone-900 antialiased" data-page="form">
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-amber-700 focus:text-white focus:px-4 focus:py-2 focus:rounded-md" data-i18n="skipLink">Skip to main content</a>
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <a href="index.html" class="text-2xl font-bold text-amber-800 tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700" aria-label="Brasaland home">Brasaland</a>
+
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+          <a href="index.html#home" class="text-stone-700 hover:text-amber-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 rounded" data-i18n="nav.home">Home</a>
+          <a href="index.html#locations" class="text-stone-700 hover:text-amber-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 rounded" data-i18n="nav.locations">Locations</a>
+          <a href="index.html#menu" class="text-stone-700 hover:text-amber-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 rounded" data-i18n="nav.menu">Menu</a>
+          <a href="application.html" class="text-amber-800 font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 rounded" aria-current="page" data-i18n="nav.brasaPoints">Brasa Points</a>
+          <a href="index.html#contact" class="text-stone-700 hover:text-amber-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 rounded" data-i18n="nav.contact">Contact</a>
+        </nav>
+
+        <div class="flex items-center gap-3">
+          <div class="flex rounded-md border border-stone-300 overflow-hidden" role="group" aria-label="Language selector">
+            <button type="button" id="lang-en" class="px-3 py-1.5 text-sm font-medium bg-amber-700 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700" aria-pressed="true" data-i18n-aria="nav.switchToEn">EN</button>
+            <button type="button" id="lang-es" class="px-3 py-1.5 text-sm font-medium text-stone-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700" aria-pressed="false" data-i18n-aria="nav.switchToEs">ES</button>
+          </div>
+
+          <button type="button" id="mobile-menu-toggle" class="lg:hidden p-2 rounded-md text-stone-700 hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700" aria-expanded="false" aria-controls="mobile-menu" data-i18n-aria="nav.openMenu">
+            <span class="sr-only" data-i18n="nav.openMenu">Open menu</span>
+            <svg data-open-icon class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            <svg data-close-icon class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <nav id="mobile-menu" class="hidden lg:hidden pb-4 border-t border-stone-100" aria-label="Main navigation">
+        <ul class="flex flex-col gap-2 pt-4">
+          <li><a href="index.html#home" class="block px-2 py-2 rounded hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-700" data-i18n="nav.home">Home</a></li>
+          <li><a href="index.html#locations" class="block px-2 py-2 rounded hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-700" data-i18n="nav.locations">Locations</a></li>
+          <li><a href="index.html#menu" class="block px-2 py-2 rounded hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-700" data-i18n="nav.menu">Menu</a></li>
+          <li><a href="application.html" class="block px-2 py-2 rounded bg-amber-50 text-amber-800 font-semibold" aria-current="page" data-i18n="nav.brasaPoints">Brasa Points</a></li>
+          <li><a href="index.html#contact" class="block px-2 py-2 rounded hover:bg-stone-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-amber-700" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="py-12 lg:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-3xl sm:text-4xl font-bold text-stone-900" data-i18n="form.pageTitle">Join Brasa Points</h1>
+      <p class="mt-4 text-lg text-stone-600" data-i18n="form.intro">Register for our digital loyalty program and start earning points at any Brasaland location.</p>
+
+      <div class="mt-6 p-4 rounded-lg bg-amber-50 border border-amber-200 text-amber-900" role="note">
+        <p data-i18n="form.disclaimer">Want to place an order? Call your favorite location or visit us directly. Online ordering coming soon!</p>
+      </div>
+
+      <div id="form-error-summary" class="hidden mt-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800" role="alert" aria-live="polite"></div>
+
+      <div id="form-success" class="hidden mt-8 p-8 rounded-xl bg-green-50 border border-green-200" role="status" tabindex="-1">
+        <h2 id="success-title" class="text-2xl font-bold text-green-900" data-i18n="form.success.title">Welcome to Brasa Points!</h2>
+        <p id="success-body" class="mt-4 text-green-800" data-i18n="form.success.body">Your registration was successful. You will receive a confirmation email in the next few minutes with your account details and how to start earning points.</p>
+        <p id="success-footer" class="mt-4 text-green-800 font-medium" data-i18n="form.success.footer">You can now enjoy your benefits at any of our 14 locations!</p>
+      </div>
+
+      <form id="brasa-points-form" class="mt-8 space-y-8" novalidate>
+        <p class="text-sm text-stone-500" data-i18n="form.requiredNote">Fields marked with * are required.</p>
+
+        <fieldset class="space-y-6">
+          <legend class="text-xl font-semibold text-stone-900 pb-2 border-b border-stone-200 w-full" data-i18n="form.personalInfo">Personal information</legend>
+
+          <div>
+            <label for="fullName" class="block text-sm font-medium text-stone-700"><span data-i18n="form.fullName">Full name</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+            <input type="text" id="fullName" name="fullName" required autocomplete="name" aria-required="true" aria-describedby="fullName-error" class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+            <span id="fullName-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label for="email" class="block text-sm font-medium text-stone-700"><span data-i18n="form.email">Email</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" required autocomplete="email" aria-required="true" aria-describedby="email-error" class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+              <span id="email-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-stone-700"><span data-i18n="form.phone">Phone</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+              <input type="tel" id="phone" name="phone" required autocomplete="tel" aria-required="true" aria-describedby="phone-hint phone-error" class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+              <span id="phone-hint" class="mt-1 block text-xs text-stone-500" data-i18n="form.phoneHint">Include country code, e.g. +57 300 123 4567 or +1 305 123 4567</span>
+              <span id="phone-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+            </div>
+          </div>
+
+          <div>
+            <label for="dateOfBirth" class="block text-sm font-medium text-stone-700"><span data-i18n="form.dateOfBirth">Date of birth</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+            <input type="date" id="dateOfBirth" name="dateOfBirth" required aria-required="true" aria-describedby="dateOfBirth-error" class="mt-1 block w-full sm:w-auto rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+            <span id="dateOfBirth-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset class="space-y-6">
+          <legend class="text-xl font-semibold text-stone-900 pb-2 border-b border-stone-200 w-full" data-i18n="form.locationInfo">Location preferences</legend>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label for="country" class="block text-sm font-medium text-stone-700"><span data-i18n="form.country">Country</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+              <select id="country" name="country" required aria-required="true" aria-describedby="country-error" class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+                <option value="" disabled selected data-i18n="form.selectCountry">Select your country</option>
+                <option value="Colombia" data-i18n="form.options.colombia">Colombia</option>
+                <option value="United States" data-i18n="form.options.unitedStates">United States</option>
+              </select>
+              <span id="country-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+            </div>
+            <div>
+              <label for="city" class="block text-sm font-medium text-stone-700"><span data-i18n="form.city">City</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+              <select id="city" name="city" required aria-required="true" aria-describedby="city-error" disabled class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:bg-stone-100 disabled:cursor-not-allowed">
+                <option value="" disabled selected data-i18n="form.selectCity">Select your city</option>
+              </select>
+              <span id="city-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+            </div>
+          </div>
+
+          <div>
+            <label for="favoriteLocation" class="block text-sm font-medium text-stone-700" data-i18n="form.favoriteLocation">Favorite Brasaland location</label>
+            <select id="favoriteLocation" name="favoriteLocation" aria-describedby="favoriteLocation-hint" disabled class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 disabled:bg-stone-100 disabled:cursor-not-allowed">
+              <option value="" disabled selected data-i18n="form.selectLocation">Select a location (optional)</option>
+            </select>
+            <span id="favoriteLocation-hint" class="sr-only">Optional field</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="space-y-6">
+          <legend class="text-xl font-semibold text-stone-900 pb-2 border-b border-stone-200 w-full" data-i18n="form.preferences">Preferences</legend>
+
+          <div>
+            <span id="dietary-label" class="block text-sm font-medium text-stone-700" data-i18n="form.dietaryPreferences">Dietary preferences</span>
+            <div class="mt-3 space-y-3" role="group" aria-labelledby="dietary-label">
+              <label class="flex items-center gap-3 cursor-pointer min-h-[44px]">
+                <input type="checkbox" name="dietaryPreferences" value="No restrictions" class="w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+                <span data-i18n="form.options.noRestrictions">No restrictions</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer min-h-[44px]">
+                <input type="checkbox" name="dietaryPreferences" value="Vegetarian" class="w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+                <span data-i18n="form.options.vegetarian">Vegetarian</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer min-h-[44px]">
+                <input type="checkbox" name="dietaryPreferences" value="Gluten-free" class="w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+                <span data-i18n="form.options.glutenFree">Gluten-free</span>
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer min-h-[44px]">
+                <input type="checkbox" name="dietaryPreferences" value="Other" class="w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+                <span data-i18n="form.options.otherDietary">Other</span>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <label for="howDidYouFindUs" class="block text-sm font-medium text-stone-700"><span data-i18n="form.howDidYouFindUs">How did you find us?</span> <span class="text-red-600" aria-hidden="true">*</span></label>
+            <select id="howDidYouFindUs" name="howDidYouFindUs" required aria-required="true" aria-describedby="howDidYouFindUs-error" class="mt-1 block w-full rounded-lg border border-stone-300 px-4 py-2.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+              <option value="" disabled selected data-i18n="form.selectSource">Select an option</option>
+              <option value="Social media" data-i18n="form.options.socialMedia">Social media</option>
+              <option value="Recommendation" data-i18n="form.options.recommendation">Recommendation</option>
+              <option value="Walked by" data-i18n="form.options.walkedBy">Walked by</option>
+              <option value="Internet search" data-i18n="form.options.internetSearch">Internet search</option>
+              <option value="Other" data-i18n="form.options.otherSource">Other</option>
+            </select>
+            <span id="howDidYouFindUs-error" class="hidden mt-1 text-sm text-red-600" role="alert"></span>
+          </div>
+        </fieldset>
+
+        <fieldset class="space-y-4">
+          <legend class="text-xl font-semibold text-stone-900 pb-2 border-b border-stone-200 w-full" data-i18n="form.consent">Consent</legend>
+
+          <div>
+            <label class="flex items-start gap-3 cursor-pointer min-h-[44px]">
+              <input type="checkbox" id="acceptTerms" name="acceptTerms" required aria-required="true" aria-describedby="acceptTerms-error" class="mt-1 w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+              <span><span data-i18n="form.acceptTerms">I accept program terms</span> <span class="text-red-600" aria-hidden="true">*</span></span>
+            </label>
+            <span id="acceptTerms-error" class="hidden mt-1 ml-8 text-sm text-red-600" role="alert"></span>
+          </div>
+
+          <div>
+            <label class="flex items-start gap-3 cursor-pointer min-h-[44px]">
+              <input type="checkbox" id="receiveOffers" name="receiveOffers" class="mt-1 w-5 h-5 rounded border-stone-300 text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700">
+              <span data-i18n="form.receiveOffers">I want to receive offers via email</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button type="submit" class="px-8 py-3 bg-amber-700 hover:bg-amber-600 text-white font-semibold rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 transition-colors" data-i18n="form.submit">Join Brasa Points</button>
+          <button type="button" id="clear-form" class="px-8 py-3 bg-white border border-stone-300 text-stone-700 font-semibold rounded-lg hover:bg-stone-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-700 transition-colors" data-i18n="form.clear">Clear form</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bg-stone-900 text-stone-300 py-8 mt-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p data-i18n="footer.copyright">&copy; 2025 Brasaland. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="https://instagram.com/brasaland" target="_blank" rel="noopener noreferrer" class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 rounded" data-i18n="footer.instagram">Instagram</a>
+        <a href="https://facebook.com/brasaland" target="_blank" rel="noopener noreferrer" class="hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-400 rounded" data-i18n="footer.facebook">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="data/locations.js"></script>
+  <script src="js/dropdowns.js"></script>
+  <script src="js/i18n.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="validation.js" defer></script>
+</body>
+</html>
