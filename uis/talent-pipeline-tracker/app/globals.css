@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #e8eef0;
+  --color-ink-muted: #94a3b8;
+  --color-paper: #0c1214;
+  --color-surface: #141c1f;
+  --color-accent: #14b8a6;
+  --color-accent-hover: #2dd4bf;
+  --color-accent-soft: #1a2e2c;
+  --color-border: #2a3a3e;
+  --color-success: #86efac;
+  --color-success-bg: #14532d;
+  --color-danger: #fca5a5;
+  --color-danger-bg: #7f1d1d;
+  --color-warning: #fde68a;
+  --color-warning-bg: #713f12;
+  --color-info: #93c5fd;
+  --color-info-bg: #1e3a8a;
+  --color-status-received: #d6d3d1;
+  --color-status-received-bg: #292524;
+  --color-status-progress: #93c5fd;
+  --color-status-progress-bg: #1e3a8a;
+  --color-status-selected: #86efac;
+  --color-status-selected-bg: #14532d;
+  --color-status-discarded: #fca5a5;
+  --color-status-discarded-bg: #7f1d1d;
+  --color-stage-pending: #d6d3d1;
+  --color-stage-pending-bg: #292524;
+  --color-stage-review: #fde68a;
+  --color-stage-review-bg: #713f12;
+  --color-stage-personal: #5eead4;
+  --color-stage-personal-bg: #115e59;
+  --color-stage-technical: #7dd3fc;
+  --color-stage-technical-bg: #0c4a6e;
+  --color-stage-offer: #2dd4bf;
+  --color-stage-offer-bg: #134e4a;
+  --color-muted-fill: #1a2428;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-muted: var(--color-ink-muted);
+  --color-paper: var(--color-paper);
+  --color-surface: var(--color-surface);
+  --color-accent: var(--color-accent);
+  --color-accent-hover: var(--color-accent-hover);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-border: var(--color-border);
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  --color-danger: var(--color-danger);
+  --color-danger-bg: var(--color-danger-bg);
+  --color-muted-fill: var(--color-muted-fill);
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-fraunces);
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 1.2s ease-in-out infinite;
+}
+
+/* Native form controls on dark surfaces */
+input,
+select,
+textarea {
+  color-scheme: dark;
+}
