@@ -1,0 +1,29 @@
+{
+  "name": "Brasaland MS3 Talent Pipeline Tracker",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Next.js App Router Talent Pipeline Tracker for Brasaland People & Talent: candidate list, filters/search, detail with status/stage PATCH and notes, register and edit forms, Brasaland-branded UI.",
+  "implementationRoot": "uis/talent-pipeline-tracker/",
+  "stack": {
+    "framework": "Next.js (App Router)",
+    "language": "TypeScript",
+    "styling": "Tailwind CSS",
+    "state": "React hooks only",
+    "apiBase": "https://playground.4geeks.com/tracker/api/v1"
+  },
+  "routes": [
+    "/",
+    "/candidates/new",
+    "/candidates/[id]",
+    "/candidates/[id]/edit"
+  ],
+  "deliverables": [
+    "uis/talent-pipeline-tracker/",
+    "uis/talent-pipeline-tracker/README.md",
+    "CONTEXT.md",
+    "CONTEXT.es.md",
+    "archive/ms-3-plan/ms-3-plan.md",
+    "archive/ms-3-plan/ms-3-CONTEXT.md",
+    "archive/ms-3-plan/plan.json"
+  ]
+}
