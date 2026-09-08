@@ -5,8 +5,8 @@ This folder contains **all projects with a user interface** for the cross-functi
 Projects stored here include:
 
 - **`website`** — the company's public-facing web presence.
-- **`talent-pipeline-tracker`** — Brasaland People & Talent candidate tracker (Next.js).
-- **`backoffice`** — the internal admin application (when added). Ideal place for auth, operations, and other back-office capabilities.
+- **`backoffice`** — internal Brasaland Digital dashboard (Next.js, port 3001).
+- **`talent-pipeline-tracker`** — Brasaland People & Talent candidate tracker (Next.js, port 3000).
 
 Organize `uis/` by **different concerns** — each subfolder covers a distinct area of the company (for example, public web vs internal operations) and includes its own technical and functional documentation.
 
