@@ -1,0 +1,33 @@
+{
+  "name": "Brasaland MS4 AI-driven Engineering",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Monorepo AI setup: memory bank, AGENTS.md, .agents rules/skills, uis/backoffice internal dashboard, website dev script verification.",
+  "implementationRoot": ".",
+  "branch": "feature/agent-memory-bank",
+  "stack": {
+    "agentConfig": ".agents/",
+    "memoryBank": "memory-bank/",
+    "backoffice": "Next.js (App Router) + TypeScript + Tailwind CSS v4",
+    "website": "Static HTML + Tailwind CDN + vanilla JS"
+  },
+  "ports": {
+    "website": 8080,
+    "backoffice": 3001,
+    "talentPipelineTracker": 3000
+  },
+  "deliverables": [
+    "memory-bank/projectbrief.md",
+    "memory-bank/techContext.md",
+    "memory-bank/progress.md",
+    "AGENTS.md",
+    ".agents/rules/monorepo-structure.md",
+    ".agents/rules/uis-isolation.md",
+    ".agents/skills/verify-ui-apps/SKILL.md",
+    "uis/backoffice/",
+    "uis/website/package.json",
+    "archive/ms-4-plan/ms-4-plan.md",
+    "archive/ms-4-plan/ms-4-CONTEXT.md",
+    "archive/ms-4-plan/plan.json"
+  ]
+}

@@ -21,10 +21,16 @@ Brasaland Milestone 1 — corporate landing page and Brasa Points registration f
 From this directory (`uis/website/`):
 
 ```bash
-npx http-server . -p 3000 -a 0.0.0.0
+npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Or directly:
+
+```bash
+npx http-server . -p 8080 -a 0.0.0.0
+```
+
+Open [http://localhost:8080](http://localhost:8080) in your browser.
 
 Compatible with GitHub Codespaces — forward port 3000 when prompted.
 

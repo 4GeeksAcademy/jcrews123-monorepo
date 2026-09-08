@@ -1,0 +1,21 @@
+# UI app isolation
+
+**Scope:** File pattern — `uis/**`
+
+## Rules
+
+1. Each app under `uis/` must have its own layout, styling, and entry point.
+2. The public website (`uis/website/`) layout and assets must not be imported by internal apps.
+3. Internal apps (`uis/backoffice/`, `uis/talent-pipeline-tracker/`, etc.) must not share React/layout code with each other unless extracted to a deliberate shared package with developer approval.
+4. Every new UI app must include:
+   - `README.md` with setup and run instructions
+   - A documented dev command (`npm run dev` or equivalent)
+   - Its own port to avoid conflicts (see `memory-bank/techContext.md`)
+5. Company data shown in UI should come from typed `data/` modules or APIs — not hard-coded strings scattered across components.
+
+## Visual distinction
+
+- **Public website:** marketing look (amber/stone, hero sections, SEO)
+- **Internal apps:** operational look (dashboards, tables, sidebars)
+
+Do not reuse the public marketing shell for backoffice views.
