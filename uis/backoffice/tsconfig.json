@@ -15,7 +15,8 @@
     "incremental": true,
     "plugins": [{ "name": "next" }],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@brasaland/operations": ["../../apps/operations/src/index.ts"]
     }
   },
   "include": [

@@ -35,4 +35,4 @@ Uses a slate sidebar + white content area — intentionally distinct from the pu
 
 ## Data
 
-Company facts live in `data/company.ts`, aligned with root [`CONTEXT.md`](../../CONTEXT.md) and the location hierarchy from `uis/website/data/locations.js`.
+Company facts live in `data/departments.ts` (from CONTEXT). Operations metrics import from `@brasaland/operations` via `lib/operations-dashboard.ts`.
