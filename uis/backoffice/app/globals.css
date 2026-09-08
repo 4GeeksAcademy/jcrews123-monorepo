@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #0f172a;
+  --color-muted: #64748b;
+  --color-surface: #f8fafc;
+  --color-accent: #4f46e5;
+}
+
+@theme inline {
+  --font-sans: var(--font-jakarta);
+  --font-display: var(--font-fraunces);
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+}
