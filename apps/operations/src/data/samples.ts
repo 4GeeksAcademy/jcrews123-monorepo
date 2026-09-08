@@ -1,4 +1,4 @@
-import type { Location, MenuItem, SaleTransaction, WasteRecord } from "../types/models.js";
+import type { Location, MenuItem, SaleTransaction, WasteRecord } from "../types/models";
 
 export const sampleMenuItems: MenuItem[] = [
   {

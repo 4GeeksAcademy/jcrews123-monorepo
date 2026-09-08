@@ -1,4 +1,4 @@
-import type { Location, MenuItem } from "../types/models.js";
+import type { Location, MenuItem } from "../types/models";
 
 export function findLocationById(
   locations: Location[],
