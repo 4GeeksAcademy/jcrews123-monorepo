@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: MS-4 in progress_
+_Last updated: Backend Architecture Proposal complete_
 
 ## Completed
 
@@ -24,9 +24,13 @@ _Last updated: MS-4 in progress_
 - [x] `uis/backoffice/` shell
 - [x] `archive/ms-4-plan/`
 
+## Completed (Backend Architecture Proposal)
+
+- [x] `docs/ARCHITECTURE_PROPOSAL.md` — layered domain monolith, FastAPI router map, FE/BE separation, risks
+
 ## Next (future milestones)
 
-- Central API under `services/`
+- MS-5: Inventory API under `services/api/` (`/api/v1/inventory`)
 - Real-time telemetry and data pipelines under `data/`
 - Product agents under `agents/`
 - Workflows and automations under `workflows/`
@@ -39,6 +43,7 @@ _Last updated: MS-4 in progress_
 
 ## Reference docs
 
+- Backend architecture proposal: `docs/ARCHITECTURE_PROPOSAL.md`
 - MS-4 plan: `archive/ms-4-plan/ms-4-plan.md`
 - MS-3 assignment: `archive/ms-3-plan/ms-3-CONTEXT.md`
 - MS-1 plan: `archive/ms-1-plan/ms-1-plan.md`
