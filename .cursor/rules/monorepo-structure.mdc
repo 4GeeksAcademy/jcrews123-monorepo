@@ -1,8 +1,11 @@
+---
+description: Folder ownership and layout conventions for the Brasaland monorepo
+alwaysApply: true
+---
+
 # Monorepo structure
 
-**Scope:** Always active — applies to every agent session in this repository.
-
-**Cursor:** Auto-loaded via [`.cursor/rules/monorepo-structure.mdc`](../../.cursor/rules/monorepo-structure.mdc) (`alwaysApply: true`). Keep this file and the `.mdc` copy in sync when editing.
+Canonical copy: `.agents/rules/monorepo-structure.md` — keep both in sync when editing.
 
 ## Folder ownership
 
