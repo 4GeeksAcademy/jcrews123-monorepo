@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Backend Architecture Proposal complete_
+_Last updated: Consolidated Cursor rules — auto-load monorepo + uis-isolation; agent-requested rules stay in `.agents/rules/`_
 
 ## Completed
 
@@ -23,6 +23,12 @@ _Last updated: Backend Architecture Proposal complete_
 - [x] `memory-bank/`, `AGENTS.md`, `.agents/`
 - [x] `uis/backoffice/` shell
 - [x] `archive/ms-4-plan/`
+
+## Completed (agent rules consolidation)
+
+- [x] `.cursor/rules/` — `monorepo-structure` (`alwaysApply`), `uis-isolation` (`uis/**` globs)
+- [x] Removed duplicate `archive-milestone` / `progress-sync` from `.cursor/rules/` (canonical in `.agents/rules/`)
+- [x] `AGENTS.md` Rules section documents split between auto-loaded and agent-requested rules
 
 ## Completed (Backend Architecture Proposal)
 

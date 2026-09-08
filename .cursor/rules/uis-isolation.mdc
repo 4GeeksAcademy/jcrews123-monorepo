@@ -1,8 +1,12 @@
+---
+description: Separate layouts and data sources per UI app under uis/
+globs: uis/**
+alwaysApply: false
+---
+
 # UI app isolation
 
-**Scope:** File pattern — `uis/**`
-
-**Cursor:** Auto-loaded via [`.cursor/rules/uis-isolation.mdc`](../../.cursor/rules/uis-isolation.mdc) when editing `uis/**`. Keep this file and the `.mdc` copy in sync when editing.
+Canonical copy: `.agents/rules/uis-isolation.md` — keep both in sync when editing.
 
 ## Rules
 

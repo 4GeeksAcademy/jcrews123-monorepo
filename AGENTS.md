@@ -51,6 +51,25 @@ Do **not** modify these without explicit developer confirmation:
 | Dev-tool agent config | `.agents/` |
 | Product agents (later) | `agents/` |
 
+## Rules
+
+Canonical rule text lives in [`.agents/rules/`](.agents/rules/). Cursor auto-enforces two rules via [`.cursor/rules/`](.cursor/rules/):
+
+| Rule | Cursor file | When it applies |
+|------|-------------|-----------------|
+| Monorepo structure | `monorepo-structure.mdc` | Every session (`alwaysApply`) |
+| UI app isolation | `uis-isolation.mdc` | When editing `uis/**` |
+
+Apply these from `.agents/rules/` when relevant (not auto-loaded by Cursor):
+
+| Rule | When to apply |
+|------|----------------|
+| [`syllabus-first`](.agents/rules/syllabus-first.md) | Starting, reviewing, or submitting milestone work |
+| [`archive-milestone`](.agents/rules/archive-milestone.md) | Creating or completing `archive/ms-N-plan/` |
+| [`progress-sync`](.agents/rules/progress-sync.md) | Before commits or session handoffs |
+
+When editing auto-loaded rules, update both `.cursor/rules/*.mdc` and the matching `.agents/rules/*.md`.
+
 ## Skills
 
 Reusable workflows live in [`.agents/skills/`](.agents/skills/). Use [`verify-ui-apps`](.agents/skills/verify-ui-apps/SKILL.md) before UI-related PRs. Use [`resolve-milestone-requirements`](.agents/skills/resolve-milestone-requirements/SKILL.md) before starting or resubmitting milestone work.
