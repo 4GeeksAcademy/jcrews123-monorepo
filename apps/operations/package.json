@@ -1,0 +1,15 @@
+{
+  "name": "@brasaland/operations",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brasaland MS-2 operations data processing utilities",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "demo": "tsx src/demo.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}

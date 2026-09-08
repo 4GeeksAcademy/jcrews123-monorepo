@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "indexTitle": "Brasaland | Comida a la Parrilla en Colombia y Florida",
+    "indexDescription": "Cadena de restaurantes Brasaland desde 2008. 14 ubicaciones en Colombia y Florida. Únete al programa Brasa Points.",
+    "formTitle": "Únete a Brasa Points | Programa de Lealtad Brasaland",
+    "formDescription": "Regístrate en Brasa Points y acumula puntos en cualquiera de nuestras 14 ubicaciones Brasaland."
+  },
+  "nav": {
+    "home": "Inicio",
+    "locations": "Ubicaciones",
+    "menu": "Menú",
+    "brasaPoints": "Brasa Points",
+    "contact": "Contacto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú",
+    "mainNav": "Navegación principal",
+    "switchToEn": "Cambiar a inglés",
+    "switchToEs": "Cambiar a español"
+  },
+  "hero": {
+    "headline": "El sabor de la parrilla, en cada bocado",
+    "subheadline": "Desde 2008 sirviendo las mejores carnes a la parrilla en Colombia y Estados Unidos. 14 ubicaciones, una pasión por la calidad y el sabor.",
+    "cta": "Únete a Brasa Points"
+  },
+  "story": {
+    "title": "Nuestra Historia",
+    "text": "Fundada en Medellín en 2008, Brasaland comenzó como un sueño familiar: compartir el auténtico sabor de la carne a la parrilla con calidad constante y servicio cálido. Hoy somos 14 restaurantes en dos países, pero mantenemos la misma receta del éxito: productos frescos, técnicas tradicionales y pasión por cada plato que servimos.",
+    "imageAlt": "Carnes a la parrilla servidas en un restaurante Brasaland"
+  },
+  "unique": {
+    "title": "Lo Que Nos Hace Únicos",
+    "qualityTitle": "Calidad Constante",
+    "quality1": "Mismas recetas y estándares en todas las ubicaciones",
+    "quality2": "Ingredientes frescos seleccionados diariamente",
+    "experienceTitle": "Experiencia Cálida",
+    "experience1": "Servicio amable y atento",
+    "experience2": "Ambiente familiar en cada visita",
+    "speedTitle": "Rapidez",
+    "speed1": "Tu comida lista en minutos",
+    "speed2": "Sin sacrificar sabor ni calidad"
+  },
+  "locations": {
+    "title": "Nuestras Ubicaciones",
+    "colombiaTitle": "Colombia",
+    "colombiaText": "10 restaurantes en Medellín, Bogotá y Cali",
+    "colombiaHours": "Horario: Lun-Dom 11:00 AM - 10:00 PM",
+    "usaTitle": "Estados Unidos (Florida)",
+    "usaText": "4 restaurantes en Miami y Orlando",
+    "usaHours": "Horario: Lun-Dom 11:00 AM - 10:00 PM"
+  },
+  "menuSection": {
+    "title": "Nuestro Menú",
+    "intro": "Desde cortes a la parrilla hasta acompañamientos frescos y bebidas, cada ubicación Brasaland sirve las mismas recetas queridas. Visítanos para explorar el menú completo.",
+    "grilled": "Carnes a la parrilla y combos",
+    "sides": "Acompañamientos y ensaladas",
+    "beverages": "Bebidas y postres",
+    "note": "Menú completo disponible en las 14 ubicaciones."
+  },
+  "brasaPoints": {
+    "title": "Brasa Points",
+    "subtitle": "Acumula puntos en cada visita",
+    "point1": "Acumula 1 punto por cada $10.000 COP o $5 USD",
+    "point2": "Canjea tus puntos por descuentos y platos gratis",
+    "point3": "Ofertas exclusivas para miembros",
+    "point4": "¡Registro 100% digital - no más tarjetas de papel!",
+    "cta": "Regístrate en Brasa Points"
+  },
+  "contact": {
+    "title": "Contacto",
+    "emailLabel": "Correo",
+    "colombiaLabel": "Colombia",
+    "floridaLabel": "Florida"
+  },
+  "footer": {
+    "copyright": "© 2025 Brasaland. Todos los derechos reservados.",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "form": {
+    "pageTitle": "Únete a Brasa Points",
+    "intro": "Regístrate en nuestro programa de lealtad digital y comienza a acumular puntos en cualquier ubicación Brasaland.",
+    "disclaimer": "¿Quieres hacer un pedido? Llama a tu ubicación favorita o visítanos directamente. ¡Pedidos en línea próximamente!",
+    "personalInfo": "Información personal",
+    "locationInfo": "Preferencias de ubicación",
+    "preferences": "Preferencias",
+    "consent": "Consentimiento",
+    "fullName": "Nombre completo",
+    "email": "Correo electrónico",
+    "phone": "Teléfono",
+    "phoneHint": "Incluye código de país, ej. +57 300 123 4567 o +1 305 123 4567",
+    "country": "País",
+    "city": "Ciudad",
+    "favoriteLocation": "Ubicación Brasaland favorita",
+    "dietaryPreferences": "Preferencias alimentarias",
+    "howDidYouFindUs": "¿Cómo nos encontraste?",
+    "dateOfBirth": "Fecha de nacimiento",
+    "acceptTerms": "Acepto los términos del programa",
+    "receiveOffers": "Quiero recibir ofertas por correo electrónico",
+    "selectCountry": "Selecciona tu país",
+    "selectCity": "Selecciona tu ciudad",
+    "selectLocation": "Selecciona una ubicación (opcional)",
+    "selectSource": "Selecciona una opción",
+    "submit": "Únete a Brasa Points",
+    "clear": "Limpiar formulario",
+    "requiredNote": "Los campos marcados con * son obligatorios.",
+    "errorSummary": "Por favor corrige los errores antes de enviar.",
+    "options": {
+      "colombia": "Colombia",
+      "unitedStates": "Estados Unidos",
+      "medellin": "Medellín",
+      "bogota": "Bogotá",
+      "cali": "Cali",
+      "miami": "Miami",
+      "orlando": "Orlando",
+      "noRestrictions": "Sin restricciones",
+      "vegetarian": "Vegetariano",
+      "glutenFree": "Sin gluten",
+      "otherDietary": "Otro",
+      "socialMedia": "Redes sociales",
+      "recommendation": "Recomendación",
+      "walkedBy": "Pasé por el local",
+      "internetSearch": "Búsqueda en internet",
+      "otherSource": "Otro"
+    },
+    "errors": {
+      "fullName": "Ingresa tu nombre completo (nombre y apellido)",
+      "email": "Ingresa un correo válido (ejemplo: nombre@email.com)",
+      "phone": "El teléfono debe incluir código de país (ejemplo: +57 300 123 4567 o +1 305 123 4567)",
+      "country": "Selecciona tu país",
+      "city": "Selecciona tu ciudad",
+      "howDidYouFindUs": "Cuéntanos cómo encontraste Brasaland",
+      "dateOfBirth": "Debes tener 18 años o más para registrarte en Brasa Points",
+      "acceptTerms": "Debes aceptar los términos del programa Brasa Points para continuar"
+    },
+    "success": {
+      "title": "¡Bienvenido a Brasa Points!",
+      "body": "Tu registro fue exitoso. Recibirás un correo de confirmación en los próximos minutos con los detalles de tu cuenta y cómo comenzar a acumular puntos.",
+      "footer": "¡Ahora puedes disfrutar tus beneficios en cualquiera de nuestras 14 ubicaciones!"
+    }
+  },
+  "skipLink": "Saltar al contenido principal"
+}

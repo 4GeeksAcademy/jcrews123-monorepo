@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "indexTitle": "Brasaland | Grilled Food in Colombia & Florida",
+    "indexDescription": "Brasaland grilled food restaurant chain since 2008. 14 locations in Colombia and Florida. Join Brasa Points loyalty program.",
+    "formTitle": "Join Brasa Points | Brasaland Loyalty Program",
+    "formDescription": "Register for Brasa Points digital loyalty. Earn points at any of our 14 Brasaland locations."
+  },
+  "nav": {
+    "home": "Home",
+    "locations": "Locations",
+    "menu": "Menu",
+    "brasaPoints": "Brasa Points",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "mainNav": "Main navigation",
+    "switchToEn": "Switch to English",
+    "switchToEs": "Switch to Spanish"
+  },
+  "hero": {
+    "headline": "The taste of the grill, in every bite",
+    "subheadline": "Since 2008 serving the best grilled meats in Colombia and the United States. 14 locations, one passion for quality and flavor.",
+    "cta": "Join Brasa Points"
+  },
+  "story": {
+    "title": "Our Story",
+    "text": "Founded in Medellín in 2008, Brasaland began as a family dream: sharing the authentic taste of grilled meat with consistent quality and warm service. Today we are 14 restaurants in two countries, but we maintain the same recipe for success: fresh products, traditional techniques, and passion for every dish we serve.",
+    "imageAlt": "Grilled meats served at a Brasaland restaurant"
+  },
+  "unique": {
+    "title": "What Makes Us Unique",
+    "qualityTitle": "Consistent Quality",
+    "quality1": "Same recipes and standards in all locations",
+    "quality2": "Fresh ingredients selected daily",
+    "experienceTitle": "Warm Experience",
+    "experience1": "Friendly and attentive service",
+    "experience2": "Family atmosphere on every visit",
+    "speedTitle": "Speed",
+    "speed1": "Your food ready in minutes",
+    "speed2": "Without sacrificing flavor or quality"
+  },
+  "locations": {
+    "title": "Our Locations",
+    "colombiaTitle": "Colombia",
+    "colombiaText": "10 restaurants in Medellín, Bogotá and Cali",
+    "colombiaHours": "Hours: Mon-Sun 11:00 AM - 10:00 PM",
+    "usaTitle": "United States (Florida)",
+    "usaText": "4 restaurants in Miami and Orlando",
+    "usaHours": "Hours: Mon-Sun 11:00 AM - 10:00 PM"
+  },
+  "menuSection": {
+    "title": "Our Menu",
+    "intro": "From signature grilled cuts to fresh sides and beverages, every Brasaland location serves the same beloved recipes. Visit us in person to explore the full menu.",
+    "grilled": "Grilled meats & combos",
+    "sides": "Sides & salads",
+    "beverages": "Beverages & desserts",
+    "note": "Full menu available at all 14 locations."
+  },
+  "brasaPoints": {
+    "title": "Brasa Points",
+    "subtitle": "Earn points with every visit",
+    "point1": "Accumulate 1 point for every $10,000 COP or $5 USD",
+    "point2": "Redeem your points for discounts and free dishes",
+    "point3": "Exclusive offers for members",
+    "point4": "100% digital registration - no more paper cards!",
+    "cta": "Register for Brasa Points"
+  },
+  "contact": {
+    "title": "Contact",
+    "emailLabel": "Email",
+    "colombiaLabel": "Colombia",
+    "floridaLabel": "Florida"
+  },
+  "footer": {
+    "copyright": "© 2025 Brasaland. All rights reserved.",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "form": {
+    "pageTitle": "Join Brasa Points",
+    "intro": "Register for our digital loyalty program and start earning points at any Brasaland location.",
+    "disclaimer": "Want to place an order? Call your favorite location or visit us directly. Online ordering coming soon!",
+    "personalInfo": "Personal information",
+    "locationInfo": "Location preferences",
+    "preferences": "Preferences",
+    "consent": "Consent",
+    "fullName": "Full name",
+    "email": "Email",
+    "phone": "Phone",
+    "phoneHint": "Include country code, e.g. +57 300 123 4567 or +1 305 123 4567",
+    "country": "Country",
+    "city": "City",
+    "favoriteLocation": "Favorite Brasaland location",
+    "dietaryPreferences": "Dietary preferences",
+    "howDidYouFindUs": "How did you find us?",
+    "dateOfBirth": "Date of birth",
+    "acceptTerms": "I accept program terms",
+    "receiveOffers": "I want to receive offers via email",
+    "selectCountry": "Select your country",
+    "selectCity": "Select your city",
+    "selectLocation": "Select a location (optional)",
+    "selectSource": "Select an option",
+    "submit": "Join Brasa Points",
+    "clear": "Clear form",
+    "requiredNote": "Fields marked with * are required.",
+    "errorSummary": "Please correct the errors below before submitting.",
+    "options": {
+      "colombia": "Colombia",
+      "unitedStates": "United States",
+      "medellin": "Medellín",
+      "bogota": "Bogotá",
+      "cali": "Cali",
+      "miami": "Miami",
+      "orlando": "Orlando",
+      "noRestrictions": "No restrictions",
+      "vegetarian": "Vegetarian",
+      "glutenFree": "Gluten-free",
+      "otherDietary": "Other",
+      "socialMedia": "Social media",
+      "recommendation": "Recommendation",
+      "walkedBy": "Walked by",
+      "internetSearch": "Internet search",
+      "otherSource": "Other"
+    },
+    "errors": {
+      "fullName": "Enter your full name (first and last name)",
+      "email": "Enter a valid email (example: name@email.com)",
+      "phone": "Phone must include country code (example: +57 300 123 4567 or +1 305 123 4567)",
+      "country": "Select your country",
+      "city": "Select your city",
+      "howDidYouFindUs": "Tell us how you found Brasaland",
+      "dateOfBirth": "You must be 18 or older to register for Brasa Points",
+      "acceptTerms": "You must accept the Brasa Points program terms to continue"
+    },
+    "success": {
+      "title": "Welcome to Brasa Points!",
+      "body": "Your registration was successful. You will receive a confirmation email in the next few minutes with your account details and how to start earning points.",
+      "footer": "You can now enjoy your benefits at any of our 14 locations!"
+    }
+  },
+  "skipLink": "Skip to main content"
+}

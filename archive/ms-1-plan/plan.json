@@ -1,0 +1,26 @@
+{
+  "name": "Brasaland MS1 Plan",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Bilingual static website for Brasaland Milestone 1: landing page, Brasa Points registration form, vanilla JS validation, Tailwind CSS, WCAG AA, SEO/Schema.org.",
+  "implementationRoot": "uis/website/",
+  "stack": {
+    "framework": "HTML5 + Tailwind CSS (CDN)",
+    "javascript": "Vanilla JavaScript",
+    "primaryLanguage": "en",
+    "secondaryLanguage": "es"
+  },
+  "deliverables": [
+    "uis/website/index.html",
+    "uis/website/application.html",
+    "uis/website/validation.js",
+    "uis/website/js/dropdowns.js",
+    "uis/website/js/i18n.js",
+    "uis/website/js/main.js",
+    "uis/website/data/locations.js",
+    "uis/website/i18n/en.json",
+    "uis/website/i18n/es.json",
+    "uis/website/README.md",
+    "CONTEXT.md"
+  ]
+}
