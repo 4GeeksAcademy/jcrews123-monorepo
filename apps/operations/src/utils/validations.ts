@@ -3,7 +3,7 @@ import type {
   MenuItem,
   SaleTransaction,
   ValidationResult,
-} from "../types/models.js";
+} from "../types/models";
 
 export function validateMenuItem(item: MenuItem): ValidationResult {
   const errors: string[] = [];

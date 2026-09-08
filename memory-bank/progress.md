@@ -11,15 +11,18 @@ _Last updated: MS-4 in progress_
 | MS-3 | Talent Pipeline Tracker (Next.js) | `uis/talent-pipeline-tracker/` |
 | — | MS-1/2/3 merged to `main` via PR #1 | — |
 
-## In progress (MS-4 — AI-driven Engineering)
+## In progress (MS-4 audit remediation)
 
-- [x] `CONTEXT.md` restored to company briefing (Brasaland general context)
-- [x] `memory-bank/` — projectbrief, techContext, progress
-- [x] Root `AGENTS.md` with pre-commit workflow
-- [x] `.agents/rules/` and `.agents/skills/verify-ui-apps/`
-- [x] `uis/backoffice/` internal dashboard
-- [x] `archive/ms-4-plan/` milestone documentation
-- [ ] PR from `feature/agent-memory-bank` to `main`
+- [x] Syllabus reference layer (`memory-bank/syllabusReference.md`, syllabus-first rule)
+- [x] Wire backoffice to `apps/operations` (M2 computed output)
+- [x] Migrate `uis/website` to Next.js + TypeScript
+- [ ] PR #2 updated with description and screenshots
+
+## Completed (MS-4 initial)
+
+- [x] `memory-bank/`, `AGENTS.md`, `.agents/`
+- [x] `uis/backoffice/` shell
+- [x] `archive/ms-4-plan/`
 
 ## Next (future milestones)
 

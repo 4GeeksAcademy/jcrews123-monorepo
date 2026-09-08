@@ -19,18 +19,19 @@
 
 ## Current applications
 
-### `uis/website` (MS-1)
+### `uis/website` (MS-1 / MS-4)
 
-- Static HTML + Tailwind CDN + vanilla JS modules
+- **Next.js App Router** + TypeScript + Tailwind CSS v4
 - Dev: `npm run dev` → http://localhost:8080
-- Pages: `/index.html` (landing), `/application.html` (Brasa Points registration)
-- i18n: EN/ES via `js/i18n.js` + `i18n/*.json`
+- Routes: `/` (landing), `/application` (Brasa Points form)
+- Legacy static M1: `archive/ms-1-website-static/`
 
 ### `uis/backoffice` (MS-4)
 
 - Next.js App Router + TypeScript + Tailwind CSS v4
 - Dev: `npm run dev` → http://localhost:3001
-- Internal dashboard for Brasaland Digital — separate layout from public website
+- Imports **`@brasaland/operations`** for dashboard metrics (revenue, rankings, top sellers, margins)
+- Department table from `CONTEXT.md` via `data/departments.ts`
 
 ### `uis/talent-pipeline-tracker` (MS-3)
 

@@ -3,7 +3,7 @@ import type {
   MenuCategory,
   MenuItem,
   SaleTransaction,
-} from "../types/models.js";
+} from "../types/models";
 
 export function filterSalesByLocation(
   sales: SaleTransaction[],

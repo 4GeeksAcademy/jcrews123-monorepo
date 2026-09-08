@@ -4,6 +4,9 @@
   "private": true,
   "description": "Brasaland MS-2 operations data processing utilities",
   "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
   "scripts": {
     "typecheck": "tsc --noEmit",
     "demo": "tsx src/demo.ts"

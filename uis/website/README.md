@@ -1,52 +1,44 @@
-# Brasaland Public Website
+# Brasaland Public Website (Next.js)
 
-Brasaland Milestone 1 — corporate landing page and Brasa Points registration form.
+Brasaland Milestone 1 corporate site — rebuilt for Milestone 4 as **Next.js + TypeScript** with reusable React components.
 
-## Files
+## Stack
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Landing page with brand sections, Schema.org, SEO |
-| `application.html` | Brasa Points loyalty registration form |
-| `validation.js` | Client-side form validation (real-time + submit) |
-| `js/dropdowns.js` | Country → City → Location cascading selects |
-| `js/i18n.js` | English/Spanish language switcher |
-| `js/main.js` | Mobile navigation and smooth scroll |
-| `data/locations.js` | 14 restaurant locations data |
-| `i18n/en.json` | English translations |
-| `i18n/es.json` | Spanish translations |
+- Next.js App Router
+- TypeScript
+- Tailwind CSS v4
+- EN/ES i18n via React context
 
-## Run locally
+## Setup
 
-From this directory (`uis/website/`):
+```bash
+cd uis/website
+npm install
+```
+
+## Run
 
 ```bash
 npm run dev
 ```
 
-Or directly:
+Open [http://localhost:8080](http://localhost:8080).
 
-```bash
-npx http-server . -p 8080 -a 0.0.0.0
-```
+## Routes
 
-Open [http://localhost:8080](http://localhost:8080) in your browser.
+| Path | Purpose |
+| ---- | ------- |
+| `/` | Corporate landing (hero, story, locations, menu, Brasa Points, contact) |
+| `/application` | Brasa Points registration form with validation |
 
-Compatible with GitHub Codespaces — forward port 3000 when prompted.
+## Legacy static M1
 
-## Pages
+Original HTML/JS version archived at [`archive/ms-1-website-static/`](../../archive/ms-1-website-static/).
 
-- **Landing:** `/index.html` — Hero, Our Story, Locations, Menu, Brasa Points, Contact
-- **Registration:** `/application.html` — Brasa Points signup form with validation
+## Components
 
-## Features
-
-- Tailwind CSS (CDN), mobile-first responsive design
-- Bilingual EN/ES with language switcher (preference saved in localStorage)
-- WCAG AA: semantic HTML, labels, ARIA errors, keyboard navigation, skip link
-- Schema.org Restaurant JSON-LD on landing page
-- Simulated form submission with success message
-
-## Deployment
-
-Deploy the `uis/website/` folder to Vercel or any static host. Run PageSpeed Insights on the deployed URL (target score ≥ 80).
+- `components/layout/` — header, footer
+- `components/home/` — landing sections
+- `components/forms/` — Brasa Points form
+- `lib/i18n/` — typed translations
+- `data/locations.ts` — location hierarchy for form dropdowns

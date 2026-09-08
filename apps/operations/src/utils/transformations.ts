@@ -9,8 +9,8 @@ import type {
   TopSellingItem,
   WasteReason,
   WasteRecord,
-} from "../types/models.js";
-import { filterSalesByLocation } from "./collections.js";
+} from "../types/models";
+import { filterSalesByLocation } from "./collections";
 
 const EXCHANGE_RATE = 4000;
 

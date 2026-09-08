@@ -3,7 +3,7 @@ import {
   sampleMenuItems,
   sampleSales,
   sampleWasteRecords,
-} from "./data/samples.js";
+} from "./data/samples";
 import {
   filterActiveLocations,
   filterMenuItemsByCategory,
@@ -11,12 +11,12 @@ import {
   filterSalesByLocation,
   sortLocationsByCapacity,
   sortMenuItemsByPrice,
-} from "./utils/collections.js";
+} from "./utils/collections";
 import {
   binarySearchLocationByCapacity,
   findLocationById,
   findMenuItemByName,
-} from "./utils/search.js";
+} from "./utils/search";
 import {
   calculateAverageTicket,
   calculateCountryComparison,
@@ -29,13 +29,13 @@ import {
   groupWasteByReason,
   rankLocationsByPerformance,
   scoreLocationPerformance,
-} from "./utils/transformations.js";
+} from "./utils/transformations";
 import {
   validateLocation,
   validateMenuItem,
   validateSaleTransaction,
-} from "./utils/validations.js";
-import type { MenuItem } from "./types/models.js";
+} from "./utils/validations";
+import type { MenuItem } from "./types/models";
 
 function section(title: string): void {
   console.log(`\n=== ${title} ===`);

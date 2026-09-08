@@ -10,14 +10,15 @@ At the start of each session, read these files in order:
 2. [`memory-bank/projectbrief.md`](memory-bank/projectbrief.md) — business objectives and department needs
 3. [`memory-bank/techContext.md`](memory-bank/techContext.md) — stack, folder layout, port conventions
 4. [`memory-bank/progress.md`](memory-bank/progress.md) — current state and active work
+5. [`memory-bank/syllabusReference.md`](memory-bank/syllabusReference.md) — when the task is milestone-scoped
 
-When working inside a specific app, also read that app's `README.md` and any app-local `CONTEXT.md`.
+When working inside a specific app, also read that app's `README.md` and any app-local `CONTEXT.md`. For milestone work, fetch the syllabus project README linked from `syllabusReference.md`.
 
 ## Pre-commit workflow
 
 Complete these steps in order before every commit:
 
-1. **Confirm scope** — Verify the task aligns with `memory-bank/progress.md` and `CONTEXT.md`. Do not modify protected paths without explicit developer approval.
+1. **Confirm scope** — Verify the task aligns with `memory-bank/progress.md`, `CONTEXT.md`, and the **syllabus project README** for the active milestone (see `syllabusReference.md`). Do not modify protected paths without explicit developer approval.
 2. **Follow conventions** — Place code in the correct folder per [`uis/README.md`](uis/README.md) and sibling folder guides. Match existing naming and patterns in the target app.
 3. **Verify changes** — Run checks for affected apps:
    - `uis/website`: `npm run dev`, confirm HTTP 200 on `/`
@@ -52,4 +53,4 @@ Do **not** modify these without explicit developer confirmation:
 
 ## Skills
 
-Reusable workflows live in [`.agents/skills/`](.agents/skills/). Use [`verify-ui-apps`](.agents/skills/verify-ui-apps/SKILL.md) before UI-related PRs.
+Reusable workflows live in [`.agents/skills/`](.agents/skills/). Use [`verify-ui-apps`](.agents/skills/verify-ui-apps/SKILL.md) before UI-related PRs. Use [`resolve-milestone-requirements`](.agents/skills/resolve-milestone-requirements/SKILL.md) before starting or resubmitting milestone work.

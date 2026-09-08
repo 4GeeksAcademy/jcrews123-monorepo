@@ -1,6 +1,10 @@
-import { locationRows, totalRestaurantCount } from "@/data/company";
+import type { OperationsDashboard } from "@/lib/operations-dashboard";
 
-export function LocationTable() {
+export function LocationPerformanceTable({
+  data,
+}: {
+  data: OperationsDashboard;
+}) {
   return (
     <section
       id="locations"
@@ -12,35 +16,37 @@ export function LocationTable() {
           id="locations-heading"
           className="font-display text-lg font-semibold text-slate-900"
         >
-          Location network
+          Location performance (M2)
         </h3>
         <p className="mt-1 text-sm text-slate-600">
-          {totalRestaurantCount} restaurants across Colombia and the United
-          States.
+          rankLocationsByPerformance + calculateLocationMargin from{" "}
+          <code className="text-xs">@brasaland/operations</code>
         </p>
       </div>
       <div className="overflow-x-auto">
         <table className="min-w-full text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-6 py-3 font-semibold">Country</th>
+              <th className="px-6 py-3 font-semibold">Location</th>
               <th className="px-6 py-3 font-semibold">City</th>
-              <th className="px-6 py-3 font-semibold">Restaurants</th>
-              <th className="px-6 py-3 font-semibold">Count</th>
+              <th className="px-6 py-3 font-semibold">Score</th>
+              <th className="px-6 py-3 font-semibold">Margin (USD)</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">
-            {locationRows.map((row) => (
-              <tr key={`${row.country}-${row.city}`} className="hover:bg-slate-50/80">
+            {data.rankedLocations.map((row) => (
+              <tr key={row.id} className="hover:bg-slate-50/80">
                 <td className="px-6 py-4 font-medium text-slate-900">
-                  {row.country}
-                </td>
-                <td className="px-6 py-4 text-slate-700">{row.city}</td>
-                <td className="px-6 py-4 text-slate-600">
-                  {row.restaurants.join(", ")}
+                  {row.name}
                 </td>
                 <td className="px-6 py-4 text-slate-700">
-                  {row.restaurants.length}
+                  {row.city}, {row.country}
+                </td>
+                <td className="px-6 py-4 text-slate-700">
+                  {row.score.toFixed(2)}
+                </td>
+                <td className="px-6 py-4 text-slate-700">
+                  ${row.marginUsd.toFixed(2)}
                 </td>
               </tr>
             ))}
