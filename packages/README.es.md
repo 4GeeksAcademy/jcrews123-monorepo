@@ -1,8 +1,16 @@
 # Carpeta `packages`
 
-Esta carpeta contiene **paquetes compartidos** del monorepo: librerías internas, utilidades, tipos, componentes comunes, SDKs, clientes y cualquier código reutilizable por varias aplicaciones/agentes/pipelines.
+Paquetes compartidos del monorepo: librerías internas, tipos y código reutilizable entre apps, servicios o scripts.
 
-Cada subcarpeta dentro de `packages/` debería representar **un paquete versionable** (por ejemplo `shared-types`, `ui`, `analytics-sdk`) con su README propio.
+Cada subcarpeta es **un paquete versionable** con su propio README.
 
-- **Propósito principal**: fomentar reutilización y consistencia entre todos los desarrollos de la compañía.
-- **Recomendación**: documenta los paquetes que vayas añadiendo, su API pública y cómo se consumen desde `apps/`, `agents/` y `workflows/`.
+## Paquetes
+
+| Paquete | Lenguaje | Consumidores | Descripción |
+|---------|----------|--------------|-------------|
+| [`shared/`](./shared/) | TypeScript | Frontends (futuro) | `@repo/shared-types` — tipos TS compartidos |
+| [`incident-analysis/`](./incident-analysis/) | Python | `scripts/analyze.py`, `services/api/` | Validación CSV de incidentes Brasaland, métricas, export |
+
+Añade paquetes aquí cuando la lógica se comparta entre dos o más entregables.
+
+> _English version: [README.md](./README.md)._

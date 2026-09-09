@@ -1,8 +1,15 @@
 # Carpeta `services`
 
-Esta carpeta contiene **todos los servicios backend** (APIs y workers en segundo plano) relacionados con la compañía para el proyecto transversal de AI Engineering.
+Todos los servicios backend (APIs y workers) del monorepo Brasaland Digital.
 
-Cada subcarpeta dentro de `services/` debe corresponder a **un servicio concreto** (por ejemplo `admin-api`, `data-processor-worker`) e incluir su propia documentación técnica y funcional.
+Cada subcarpeta es **un servicio** con su propio README, instrucciones de ejecución y dependencias.
 
-- **Propósito principal**: centralizar toda la lógica backend, APIs y consumidores de colas que dan soporte a los casos de uso de la compañía.
-- **Recomendación**: documenta en este archivo (o en sub-READMEs) los servicios que vayas añadiendo, su objetivo, tecnología usada y cómo ejecutarlos.
+## Servicios
+
+| Servicio | Ruta | Puerto | Descripción |
+|----------|------|--------|-------------|
+| **Brasaland API** | [`api/`](./api/) | 8000 | FastAPI — análisis CSV de incidentes (`POST /api/incidents/analyze`, `GET /api/incidents/results/export`). Primer servicio backend; inventario y otros dominios ampliarán esta app más adelante. |
+
+Ver [`api/README.md`](./api/README.md) para configuración y endpoints.
+
+> _English version: [README.md](./README.md)._

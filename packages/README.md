@@ -1,10 +1,16 @@
 # `packages` folder
 
-This folder contains **shared packages** for the monorepo: internal libraries, utilities, types, shared components, SDKs, clients, and any code reused by multiple applications, agents, or pipelines.
+Shared packages for the monorepo: internal libraries, types, and reusable code consumed by multiple apps, services, or scripts.
 
-Each subfolder under `packages/` should represent **one versionable package** (for example `shared-types`, `ui`, `analytics-sdk`) with its own README.
+Each subfolder is **one versionable package** with its own README.
 
-- **Main purpose**: encourage reuse and consistency across all company deliverables.
-- **Recommendation**: document packages as you add them—their public API and how they are consumed from `apps/`, `agents/`, and `workflows/`.
+## Packages
+
+| Package | Language | Consumers | Description |
+|---------|----------|-----------|-------------|
+| [`shared/`](./shared/) | TypeScript | Frontends (future) | `@repo/shared-types` — shared TS types |
+| [`incident-analysis/`](./incident-analysis/) | Python | `scripts/analyze.py`, `services/api/` | Brasaland incident CSV validation, metrics, console report, CSV export |
+
+Add new packages here when logic is shared across two or more deliverables — do not duplicate business rules in CLI and API separately.
 
 > _Spanish version: [README.es.md](./README.es.md)._

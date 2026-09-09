@@ -1,0 +1,38 @@
+﻿============================================================
+  BRASALAND ΓÇö INCIDENT REPORT ANALYSIS
+  Source file: incidents-brasaland.csv
+============================================================
+
+TOTAL RECORDS IN FILE .......... 100
+  Γö£ΓöÇ Valid records ................ 96
+  ΓööΓöÇ Invalid / incomplete .......... 4
+
+INVALID RECORDS BREAKDOWN
+  Γö£ΓöÇ Missing location_id ........... 1
+  Γö£ΓöÇ Invalid or missing category ... 1
+  Γö£ΓöÇ Empty description ............. 1
+  ΓööΓöÇ Closed case, no score ......... 1
+
+BREAKDOWN BY CATEGORY (valid records)
+  Γö£ΓöÇ CUSTOMER_COMPLAINT            29  (30.2%)
+  Γö£ΓöÇ EQUIPMENT                     17  (17.7%)
+  Γö£ΓöÇ SUPPLY                        22  (22.9%)
+  Γö£ΓöÇ FOOD_QUALITY                  19  (19.8%)
+  Γö£ΓöÇ STAFF                          9  (9.4%)
+
+BREAKDOWN BY STATUS (valid records)
+  Γö£ΓöÇ OPEN                          32  (33.3%)
+  Γö£ΓöÇ CLOSED                        50  (52.1%)
+  Γö£ΓöÇ DISCARDED                     14  (14.6%)
+
+SATISFACTION INDEX (closed cases)
+  Scored cases: 50 of 50
+  Average score: 3.46 / 5.00
+  Γö£ΓöÇ Score 1 (Very dissatisfied) ... 4
+  Γö£ΓöÇ Score 2 (Dissatisfied) ........ 6
+  Γö£ΓöÇ Score 3 (Neutral) ............ 12
+  Γö£ΓöÇ Score 4 (Satisfied) .......... 19
+  ΓööΓöÇ Score 5 (Very satisfied) ...... 9
+
+============================================================
+Export results to CSV? [y / n]: 

@@ -1,10 +1,15 @@
 # `services` folder
 
-This folder contains **all the backend services** (APIs and background workers) related to the company for the cross-functional AI Engineering project.
+All backend services (APIs and background workers) for the Brasaland Digital monorepo.
 
-Each subfolder inside `services/` must correspond to **one specific service** (for example: `admin-api`, `data-processor-worker`) and include its own technical and functional documentation.
+Each subfolder is **one service** with its own README, run instructions, and dependencies.
 
-- **Main purpose**: to centralize all the backend logic, APIs, and queue consumers that support the company's use cases.
-- **Recommendation**: document in this file (or in sub-READMEs) the services you add, their objective, the technology used, and how to run them.
+## Services
+
+| Service | Path | Port | Description |
+|---------|------|------|-------------|
+| **Brasaland API** | [`api/`](./api/) | 8000 | FastAPI — incident CSV analysis (`POST /api/incidents/analyze`, `GET /api/incidents/results/export`). First backend service; inventory and other domains will extend this app later. |
+
+See [`api/README.md`](./api/README.md) for setup and endpoints.
 
 > _Spanish version: [README.es.md](./README.es.md)._
