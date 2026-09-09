@@ -1,0 +1,30 @@
+{
+  "name": "Brasaland Company Incident File Analyzer",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Two-phase incident CSV analyzer: CLI validation script, shared Python package, FastAPI upload/export endpoints, and backoffice analysis page. Brasaland CONTEXT drives field rules and expected metrics.",
+  "implementationRoot": ".",
+  "syllabusProject": "ai-eng-company-incidents-file-analyzer",
+  "stack": {
+    "sharedPackage": "Python (stdlib csv)",
+    "cli": "Python 3.10+",
+    "api": "FastAPI + uvicorn",
+    "backoffice": "Next.js (App Router) + TypeScript + Tailwind CSS v4"
+  },
+  "ports": {
+    "api": 8000,
+    "backoffice": 3001
+  },
+  "deliverables": [
+    "packages/incident-analysis/",
+    "scripts/analyze.py",
+    "scripts/incidents-brasaland.csv",
+    "services/api/",
+    "uis/backoffice/app/incidents/",
+    "uis/backoffice/lib/incidents-api.ts",
+    "uis/backoffice/components/incidents/",
+    "archive/incidents-file-analyzer-plan/incidents-file-analyzer-plan.md",
+    "archive/incidents-file-analyzer-plan/incidents-file-analyzer-CONTEXT.md",
+    "archive/incidents-file-analyzer-plan/plan.json"
+  ]
+}

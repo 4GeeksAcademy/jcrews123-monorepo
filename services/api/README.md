@@ -33,6 +33,14 @@ uvicorn main:app --reload --port 8000
 
 Open http://localhost:8000/docs for Swagger UI.
 
+## Tests
+
+```bash
+pip install -r requirements.txt
+pip install -e ../../packages/incident-analysis
+python -m pytest tests
+```
+
 ## Shared logic
 
 Validation and metrics live in [`packages/incident-analysis/`](../../packages/incident-analysis/). The CLI (`scripts/analyze.py`) and this API import the same module — no duplicated business rules.
