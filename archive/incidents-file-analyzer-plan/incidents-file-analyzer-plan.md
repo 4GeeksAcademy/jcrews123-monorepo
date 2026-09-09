@@ -88,8 +88,8 @@ python -m pytest tests
 
 ### PR artifacts (manual)
 
-- [ ] Screenshot: CLI console output (`python scripts/analyze.py scripts/incidents-brasaland.csv`)
-- [ ] Screenshot: backoffice with loaded analysis (`http://localhost:3001/incidents`)
+- [ ] Screenshot: CLI console output (`python scripts/analyze.py scripts/incidents-brasaland.csv`) — expected output in [`screenshots/cli-output.txt`](screenshots/cli-output.txt)
+- [ ] Screenshot: backoffice with loaded analysis (`http://localhost:3001/incidents`) — paste PR body from [`PR_TEST_PLAN.md`](PR_TEST_PLAN.md)
 
 ## Run commands
 

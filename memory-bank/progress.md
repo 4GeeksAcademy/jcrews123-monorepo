@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Consolidated Cursor rules — auto-load monorepo + uis-isolation; agent-requested rules stay in `.agents/rules/`_
+_Last updated: Incident File Analyzer resubmit — core package pushed, fresh-clone verified_
 
 ## Completed
 
@@ -34,6 +34,19 @@ _Last updated: Consolidated Cursor rules — auto-load monorepo + uis-isolation;
 
 - [x] `docs/ARCHITECTURE_PROPOSAL.md` — layered domain monolith, FastAPI router map, FE/BE separation, risks
 
+## Completed (Company Incident File Analyzer)
+
+- [x] `packages/incident-analysis/` — shared Brasaland CSV validation, metrics, console report, CSV export
+- [x] `scripts/analyze.py` + `scripts/incidents-brasaland.csv` — Phase 1 CLI (verified counts vs syllabus CONTEXT: 100/96/4, avg satisfaction 3.46)
+- [x] `services/api/` — FastAPI `POST /api/incidents/analyze`, `GET /api/incidents/results/export`, CORS for backoffice
+- [x] `uis/backoffice/app/incidents/` — upload UI, summary metrics, invalid-record alerts, CSV download
+- [x] `archive/incidents-file-analyzer-plan/` — plan, CONTEXT copy, `plan.json` (`status: implemented`)
+- [x] Folder READMEs updated: `scripts/`, `services/`, `packages/`, `uis/backoffice/`
+- [x] Regression tests pushed: `packages/incident-analysis/tests/` (6) + `services/api/tests/` (4)
+- [x] Commit `e04646c` pushed to `company-incident-file-analyzer` — package, CLI, fixture, archive, tests
+- [x] Fresh-clone verification: 10/10 tests pass, uvicorn starts, CLI matches CONTEXT (100/96/4, avg 3.46)
+- [ ] PR description updated with CLI + backoffice screenshots (see `archive/incidents-file-analyzer-plan/PR_TEST_PLAN.md`)
+
 ## Next (future milestones)
 
 - MS-5: Inventory API under `services/api/` (`/api/v1/inventory`)
@@ -43,13 +56,17 @@ _Last updated: Consolidated Cursor rules — auto-load monorepo + uis-isolation;
 
 ## Known gaps
 
+- Attach CLI + backoffice screenshots to the incident analyzer PR before re-grade (template: `archive/incidents-file-analyzer-plan/PR_TEST_PLAN.md`)
 - Root `README.md` still mentions template placeholder status — update after MS-4 merge
 - No `docker-compose.yml` orchestration yet
-- Backoffice routes beyond `/` are stubs (Locations, Departments nav placeholders)
+- Backoffice hash links (`#locations`, `#departments`) on dashboard only — no separate routes yet
+- Python runtime required locally for `scripts/analyze.py` and `services/api/` (`pip install -r services/api/requirements.txt` + editable `packages/incident-analysis`)
 
 ## Reference docs
 
 - Backend architecture proposal: `docs/ARCHITECTURE_PROPOSAL.md`
+- Incident File Analyzer plan: `archive/incidents-file-analyzer-plan/incidents-file-analyzer-plan.md`
+- Incident File Analyzer CONTEXT (Brasaland): `archive/incidents-file-analyzer-plan/incidents-file-analyzer-CONTEXT.md`
 - MS-4 plan: `archive/ms-4-plan/ms-4-plan.md`
 - MS-3 assignment: `archive/ms-3-plan/ms-3-CONTEXT.md`
 - MS-1 plan: `archive/ms-1-plan/ms-1-plan.md`
