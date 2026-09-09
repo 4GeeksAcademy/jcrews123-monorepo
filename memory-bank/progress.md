@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Incident File Analyzer resubmit — core package pushed, fresh-clone verified_
+_Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffice UI_
 
 ## Completed
 
@@ -47,6 +47,13 @@ _Last updated: Incident File Analyzer resubmit — core package pushed, fresh-cl
 - [x] Fresh-clone verification: 10/10 tests pass, uvicorn starts, CLI matches CONTEXT (100/96/4, avg 3.46)
 - [ ] PR description updated with CLI + backoffice screenshots (see `archive/incidents-file-analyzer-plan/PR_TEST_PLAN.md`)
 
+## In progress (Supplier Directory — syllabus #29)
+
+- [x] `services/api/` — TinyDB supplier CRUD at `/suppliers`, Pydantic validation, idempotent `seed.py`
+- [x] `uis/backoffice/app/suppliers/` — directory table, filters, create form, rate/status controls
+- [x] `archive/supplier-directory-plan/` — plan, CONTEXT copy, `plan.json`, tests
+- [ ] PR screenshots attached (see `archive/supplier-directory-plan/PR_TEST_PLAN.md`)
+
 ## Next (future milestones)
 
 - MS-5: Inventory API under `services/api/` (`/api/v1/inventory`)
@@ -66,6 +73,7 @@ _Last updated: Incident File Analyzer resubmit — core package pushed, fresh-cl
 
 - Backend architecture proposal: `docs/ARCHITECTURE_PROPOSAL.md`
 - Incident File Analyzer plan: `archive/incidents-file-analyzer-plan/incidents-file-analyzer-plan.md`
+- Supplier Directory plan: `archive/supplier-directory-plan/supplier-directory-plan.md`
 - Incident File Analyzer CONTEXT (Brasaland): `archive/incidents-file-analyzer-plan/incidents-file-analyzer-CONTEXT.md`
 - MS-4 plan: `archive/ms-4-plan/ms-4-plan.md`
 - MS-3 assignment: `archive/ms-3-plan/ms-3-CONTEXT.md`

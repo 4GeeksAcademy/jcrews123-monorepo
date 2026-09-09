@@ -1,18 +1,27 @@
 # Brasaland API (`services/api`)
 
-First FastAPI service in the monorepo. Currently exposes incident CSV analysis endpoints for the **Company Incident File Analyzer** syllabus project.
+FastAPI service for Brasaland Digital. Exposes:
 
-**Project archive:** [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) — plan, Brasaland CONTEXT, evaluation checklist, `plan.json`.
+- **Incident File Analyzer** (syllabus #27) — CSV analysis at `/api/incidents/*`
+- **Supplier Directory** (syllabus #29) — TinyDB CRUD at `/suppliers`
+
+**Archives:** [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) · [`archive/supplier-directory-plan/`](../../archive/supplier-directory-plan/)
 
 ## Endpoints
 
 | Method | Path | Description |
 |--------|------|-------------|
 | `GET` | `/health` | Health check |
-| `POST` | `/api/incidents/analyze` | Upload CSV (`multipart/form-data`, field `file`) |
-| `GET` | `/api/incidents/results/export` | Download last analysis as CSV |
+| `POST` | `/api/incidents/analyze` | Upload incident CSV |
+| `GET` | `/api/incidents/results/export` | Download last incident analysis CSV |
+| `POST` | `/suppliers` | Register supplier |
+| `GET` | `/suppliers` | List suppliers (`?country=`, `?category=`) |
+| `GET` | `/suppliers/{id}` | Supplier detail |
+| `PATCH` | `/suppliers/{id}/rate` | Update rate + `updated_at` |
+| `PATCH` | `/suppliers/{id}/status` | Activate or suspend |
+| `DELETE` | `/suppliers/{id}` | Remove supplier |
 
-> Syllabus paths use `/api/incidents/*` (not `/api/v1/*`) for grading compatibility.
+> Incident paths use `/api/incidents/*` for grading compatibility. Supplier paths use `/suppliers` per syllabus #29.
 
 ## Setup
 
@@ -28,7 +37,10 @@ pip install -e ../../packages/incident-analysis
 ## Run
 
 ```bash
-uvicorn main:app --reload --port 8000
+pip install -r requirements.txt
+pip install -e ../../packages/incident-analysis
+uv run seed
+python -m uvicorn main:app --reload --port 8000
 ```
 
 Open http://localhost:8000/docs for Swagger UI.

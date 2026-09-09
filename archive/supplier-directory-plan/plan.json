@@ -1,0 +1,32 @@
+{
+  "name": "Brasaland Supplier Directory",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "FastAPI + TinyDB + Pydantic supplier directory with seeder, CRUD/filter endpoints, and backoffice management UI for Lucía Fernández (Procurement).",
+  "implementationRoot": ".",
+  "syllabusProject": "ai-eng-supplier-directory",
+  "branch": "supplier-directory",
+  "stack": {
+    "api": "FastAPI + TinyDB + Pydantic",
+    "backoffice": "Next.js (App Router) + TypeScript + Tailwind CSS v4"
+  },
+  "ports": {
+    "api": 8000,
+    "backoffice": 3001
+  },
+  "deliverables": [
+    "services/api/database.py",
+    "services/api/supplier_constants.py",
+    "services/api/schemas/suppliers.py",
+    "services/api/routers/suppliers.py",
+    "services/api/seed.py",
+    "services/api/pyproject.toml",
+    "services/api/tests/test_suppliers_api.py",
+    "uis/backoffice/app/suppliers/",
+    "uis/backoffice/lib/suppliers-api.ts",
+    "uis/backoffice/components/suppliers/",
+    "archive/supplier-directory-plan/supplier-directory-plan.md",
+    "archive/supplier-directory-plan/supplier-directory-CONTEXT.md",
+    "archive/supplier-directory-plan/plan.json"
+  ]
+}

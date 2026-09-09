@@ -32,6 +32,22 @@ export function IncidentsHeader() {
   );
 }
 
+export function SuppliersHeader() {
+  return (
+    <header className="border-b border-slate-200 bg-white px-8 py-5">
+      <p className="text-sm font-medium text-indigo-600">Procurement</p>
+      <h2 className="mt-1 font-display text-2xl font-semibold text-slate-900">
+        Supplier directory
+      </h2>
+      <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        Manage Brasaland suppliers across Colombia and Florida — filter by
+        market and category, register new vendors, and track rate changes for
+        Lucía&apos;s procurement audits.
+      </p>
+    </header>
+  );
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-slate-50">
