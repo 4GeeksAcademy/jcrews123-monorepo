@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "brasaland-api"
+version = "0.2.0"
+description = "Brasaland Digital FastAPI service"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "python-multipart>=0.0.12",
+    "tinydb>=4.8",
+]
+
+[project.scripts]
+seed = "seed:main"
+
+[tool.setuptools]
+py-modules = [
+    "main",
+    "seed",
+    "database",
+    "supplier_constants",
+    "state",
+    "serializers",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["routers*", "schemas*"]

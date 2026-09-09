@@ -11,6 +11,7 @@ sys.path.insert(0, str(_REPO_ROOT / "packages" / "incident-analysis"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from routers.incidents import router as incidents_router  # noqa: E402
+from routers.suppliers import router as suppliers_router  # noqa: E402
 
 app = FastAPI(
     title="Brasaland Digital API",
@@ -30,6 +31,7 @@ app.add_middleware(
 )
 
 app.include_router(incidents_router)
+app.include_router(suppliers_router)
 
 
 @app.get("/health")

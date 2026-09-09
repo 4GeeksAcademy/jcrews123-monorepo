@@ -24,13 +24,14 @@ npm run dev
 
 Open [http://localhost:3001](http://localhost:3001).
 
-For **Incident Analysis** (`/incidents`), start the API first — see [`services/api/README.md`](../../services/api/README.md).
+For **Incident Analysis** (`/incidents`) or **Supplier Directory** (`/suppliers`), start the API first — see [`services/api/README.md`](../../services/api/README.md).
 
 ```bash
 # Terminal 1 — API (port 8000)
 cd services/api
 pip install -r requirements.txt && pip install -e ../../packages/incident-analysis
-uvicorn main:app --reload --port 8000
+python seed.py
+python -m uvicorn main:app --reload --port 8000
 
 # Terminal 2 — Backoffice (port 3001)
 cd uis/backoffice && npm run dev
@@ -42,12 +43,13 @@ cd uis/backoffice && npm run dev
 | ---- | ------- |
 | `/` | Dashboard with KPIs, locations, and departments |
 | `/incidents` | Upload incident CSV, view validation summary, export results |
+| `/suppliers` | Supplier directory — filter, register, update rates and status |
 
 ## Environment
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | FastAPI base URL for incident analysis |
+| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | FastAPI base URL for incidents and suppliers |
 
 ## Layout
 
@@ -60,6 +62,7 @@ Slate sidebar + white content area — intentionally distinct from the public am
 | Dashboard KPIs | `@brasaland/operations` via `lib/operations-dashboard.ts` |
 | Departments | `data/departments.ts` (from root `CONTEXT.md`) |
 | Incident analysis | `services/api` — see [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) |
+| Supplier directory | `services/api` — see [`archive/supplier-directory-plan/`](../../archive/supplier-directory-plan/) |
 
 ## Verify
 
