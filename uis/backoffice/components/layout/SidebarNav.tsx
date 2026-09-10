@@ -3,14 +3,19 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { useAuth } from "@/lib/auth-context";
+
 const navItems = [
   { href: "/", label: "Dashboard" },
   { href: "/incidents", label: "Incident Analysis" },
   { href: "/suppliers", label: "Supplier Directory" },
+  { href: "/account/profile", label: "Profile" },
+  { href: "/account/change-password", label: "Change password" },
 ];
 
 export function SidebarNav() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
 
   return (
     <aside className="flex w-64 shrink-0 flex-col border-r border-slate-700 bg-slate-900 text-slate-100">
@@ -46,8 +51,15 @@ export function SidebarNav() {
           })}
         </ul>
       </nav>
-      <div className="border-t border-slate-700 px-5 py-4 text-xs text-slate-400">
-        HQ Medellín · Ops Miami
+      <div className="border-t border-slate-700 px-5 py-4">
+        <p className="truncate text-xs text-slate-400">{user?.email}</p>
+        <button
+          type="button"
+          onClick={logout}
+          className="mt-3 text-sm font-medium text-indigo-300 hover:text-indigo-200"
+        >
+          Sign out
+        </button>
       </div>
     </aside>
   );

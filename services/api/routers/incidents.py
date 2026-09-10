@@ -3,8 +3,12 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from typing import Annotated
+
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from fastapi.responses import Response
+
+from core.deps import get_current_user
 
 _REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(_REPO_ROOT / "packages" / "incident-analysis"))
@@ -29,7 +33,11 @@ def _to_response(result) -> AnalysisResponse:
     response_model=AnalysisResponse,
     responses={400: {"model": ErrorResponse}},
 )
-async def analyze_incidents(file: UploadFile = File(...)) -> AnalysisResponse:
+async def analyze_incidents(
+    current_user: Annotated[dict, Depends(get_current_user)],
+    file: UploadFile = File(...),
+) -> AnalysisResponse:
+    _ = current_user
     if not file.filename:
         raise HTTPException(status_code=400, detail="No file uploaded.")
 
@@ -66,7 +74,10 @@ async def analyze_incidents(file: UploadFile = File(...)) -> AnalysisResponse:
 
 
 @router.get("/results/export")
-async def export_results() -> Response:
+async def export_results(
+    current_user: Annotated[dict, Depends(get_current_user)],
+) -> Response:
+    _ = current_user
     result = get_last_result()
     if result is None:
         raise HTTPException(

@@ -1,3 +1,5 @@
+import { apiFetch } from "@/lib/api-client";
+
 export type InvalidBreakdown = {
   missing_location_id: number;
   invalid_or_missing_category: number;
@@ -25,33 +27,33 @@ export type IncidentAnalysisResult = {
   satisfaction: SatisfactionSummary;
 };
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ??
-  "http://localhost:8000";
-
 export async function analyzeIncidentFile(
   file: File,
 ): Promise<IncidentAnalysisResult> {
   const formData = new FormData();
   formData.append("file", file);
 
-  const response = await fetch(`${API_BASE}/api/incidents/analyze`, {
+  return apiFetch<IncidentAnalysisResult>("/api/incidents/analyze", {
     method: "POST",
     body: formData,
   });
-
-  if (!response.ok) {
-    const body = (await response.json().catch(() => null)) as {
-      detail?: string;
-    } | null;
-    throw new Error(body?.detail ?? `Analysis failed (${response.status})`);
-  }
-
-  return response.json() as Promise<IncidentAnalysisResult>;
 }
 
 export async function downloadIncidentExport(): Promise<void> {
-  const response = await fetch(`${API_BASE}/api/incidents/results/export`);
+  const { API_BASE } = await import("@/lib/api-client");
+  const { getStoredToken } = await import("@/lib/auth-storage");
+  const token = getStoredToken();
+
+  const response = await fetch(`${API_BASE}/api/incidents/results/export`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+  });
+
+  if (response.status === 401) {
+    const { clearStoredToken } = await import("@/lib/auth-storage");
+    clearStoredToken();
+    window.location.href = "/login";
+    throw new Error("Session expired. Please sign in again.");
+  }
 
   if (!response.ok) {
     const body = (await response.json().catch(() => null)) as {

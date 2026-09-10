@@ -12,6 +12,10 @@ dependencies = [
     "uvicorn[standard]>=0.32.0",
     "python-multipart>=0.0.12",
     "tinydb>=4.8",
+    "python-jose[cryptography]>=3.3.0",
+    "libpass[bcrypt]>=1.7.4",
+    "email-validator>=2.0.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.scripts]
@@ -22,6 +26,7 @@ py-modules = [
     "main",
     "seed",
     "database",
+    "auth_database",
     "supplier_constants",
     "state",
     "serializers",
@@ -29,4 +34,4 @@ py-modules = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["routers*", "schemas*"]
+include = ["routers*", "schemas*", "core*", "services*"]

@@ -54,6 +54,15 @@ _Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffi
 - [x] `archive/supplier-directory-plan/` — plan, CONTEXT copy, `plan.json`, tests
 - [ ] PR screenshots attached (see `archive/supplier-directory-plan/PR_TEST_PLAN.md`)
 
+## Completed (User Authentication trilogy — syllabus #30–#32)
+
+- [x] **Phase 1 (AUTH-01):** JWT auth in `services/api/` — users/profiles TinyDB, `/auth`, `/users`, `/profiles`, `get_current_user`, all supplier + incident routes protected
+- [x] **Phase 2 (AUTH-02):** Backoffice login/register/profile, client route guard, shared API client with Bearer + 401 handling
+- [x] **Phase 3 (AUTH-03):** Forgot/reset/change password API + Resend integration, backoffice `/forgot-password`, `/reset-password`, `/account/change-password`
+- [x] `archive/user-authentication-plan/` — plan and verification notes
+- [x] API tests: 29 passing (`services/api/tests/`)
+- [x] Backoffice lint passing
+
 ## Next (future milestones)
 
 - MS-5: Inventory API under `services/api/` (`/api/v1/inventory`)
