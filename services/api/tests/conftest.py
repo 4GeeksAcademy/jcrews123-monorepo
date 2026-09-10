@@ -12,11 +12,16 @@ from test_helpers import login_user, register_user
 def client(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> TestClient:
     suppliers_db = tmp_path / "suppliers-test.json"
     users_db = tmp_path / "users-test.json"
+    inventory_db = tmp_path / "inventory-test.db"
     monkeypatch.setenv("SUPPLIERS_DB_PATH", str(suppliers_db))
     monkeypatch.setenv("USERS_DB_PATH", str(users_db))
+    monkeypatch.setenv("DATABASE_URL", f"sqlite:///{inventory_db}")
     monkeypatch.setenv("SECRET_KEY", "test-secret-key-for-pytest")
     monkeypatch.setenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60")
 
+    from db.postgres import reset_engine
+
+    reset_engine()
     from main import app
 
     with TestClient(app) as test_client:

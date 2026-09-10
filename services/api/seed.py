@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+_API_DIR = Path(__file__).resolve().parent
+load_dotenv(_API_DIR / ".env", override=True)
 
 from database import find_by_name_country, get_db, insert_supplier
+from inventory_seed import seed_inventory
 from supplier_constants import SUPPLIERS_SEED
-
-
-def utc_now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
+from services.users import utc_now_iso
 
 
 def run_seed() -> int:
@@ -23,6 +26,7 @@ def run_seed() -> int:
         inserted += 1
 
     print(f"Inserted {inserted} suppliers")
+    seed_inventory()
     return inserted
 
 

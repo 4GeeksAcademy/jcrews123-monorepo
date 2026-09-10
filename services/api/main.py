@@ -20,6 +20,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from routers.auth import router as auth_router  # noqa: E402
 from routers.incidents import router as incidents_router  # noqa: E402
+from routers.inventory import router as inventory_router  # noqa: E402
 from routers.profiles import router as profiles_router  # noqa: E402
 from routers.suppliers import router as suppliers_router  # noqa: E402
 from routers.users import router as users_router  # noqa: E402
@@ -46,12 +47,15 @@ app.include_router(users_router)
 app.include_router(profiles_router)
 app.include_router(incidents_router)
 app.include_router(suppliers_router)
+app.include_router(inventory_router)
 
 
 @app.on_event("startup")
 def log_startup_config() -> None:
     from core.email_config import get_resend_api_key, get_resend_from_email
+    from db.postgres import create_inventory_tables
 
+    create_inventory_tables()
     startup_logger = logging.getLogger("brasaland.api")
     startup_logger.info(
         "Resend email configured: %s (from=%s)",

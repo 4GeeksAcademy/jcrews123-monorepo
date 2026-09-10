@@ -16,6 +16,8 @@ dependencies = [
     "libpass[bcrypt]>=1.7.4",
     "email-validator>=2.0.0",
     "python-dotenv>=1.0.0",
+    "sqlmodel>=0.0.22",
+    "psycopg2-binary>=2.9.9",
 ]
 
 [project.scripts]
@@ -28,10 +30,12 @@ py-modules = [
     "database",
     "auth_database",
     "supplier_constants",
+    "inventory_constants",
+    "inventory_seed",
     "state",
     "serializers",
 ]
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["routers*", "schemas*", "core*", "services*"]
+include = ["routers*", "schemas*", "core*", "services*", "db*", "models*"]

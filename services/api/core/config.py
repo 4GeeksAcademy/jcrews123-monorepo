@@ -16,3 +16,10 @@ def get_access_token_expire_minutes() -> int:
 
 
 JWT_ALGORITHM = "HS256"
+
+
+def get_database_url() -> str:
+    url = os.environ.get("DATABASE_URL")
+    if not url:
+        raise RuntimeError("DATABASE_URL environment variable is required.")
+    return url

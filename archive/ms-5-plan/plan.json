@@ -1,0 +1,31 @@
+{
+  "name": "Brasaland MS5 Inventory Management",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Milestone 5 dual-database inventory API (TinyDB auth + Supabase SQLModel) and backoffice inventory UI.",
+  "implementationRoot": "services/api, uis/backoffice",
+  "branch": "auth",
+  "stack": {
+    "api": "FastAPI + SQLModel + Supabase PostgreSQL + TinyDB auth",
+    "backoffice": "Next.js App Router + TypeScript + Tailwind CSS v4"
+  },
+  "ports": {
+    "api": 8000,
+    "backoffice": 3001
+  },
+  "deliverables": [
+    "archive/ms-5-plan/ms-5-plan.md",
+    "archive/ms-5-plan/ms-5-CONTEXT.md",
+    "archive/ms-5-plan/plan.json",
+    "services/api/db/postgres.py",
+    "services/api/models/inventory.py",
+    "services/api/schemas/inventory.py",
+    "services/api/services/inventory.py",
+    "services/api/routers/inventory.py",
+    "services/api/inventory_constants.py",
+    "services/api/tests/test_inventory_api.py",
+    "uis/backoffice/lib/inventory-api.ts",
+    "uis/backoffice/components/inventory/",
+    "uis/backoffice/app/(dashboard)/inventory/"
+  ]
+}

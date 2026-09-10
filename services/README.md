@@ -8,7 +8,7 @@ Each subfolder is **one service** with its own README, run instructions, and dep
 
 | Service | Path | Port | Description |
 |---------|------|------|-------------|
-| **Brasaland API** | [`api/`](./api/) | 8000 | FastAPI — incident CSV analysis (`POST /api/incidents/analyze`, `GET /api/incidents/results/export`). First backend service; inventory and other domains will extend this app later. |
+| **Brasaland API** | [`api/`](./api/) | 8000 | FastAPI — incidents, suppliers, auth, inventory (`/inventory`). TinyDB + Supabase dual DB. |
 
 See [`api/README.md`](./api/README.md) for setup and endpoints.
 
