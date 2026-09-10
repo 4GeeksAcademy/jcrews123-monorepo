@@ -51,6 +51,10 @@ Register at `/register` or sign in at `/login`. JWT is stored in `localStorage` 
 | `/` | Dashboard with KPIs, locations, and departments |
 | `/incidents` | Upload incident CSV, view validation summary, export results |
 | `/suppliers` | Supplier directory — filter, register, update rates and status |
+| `/inventory/products` | Ingredient stock levels with low/critical indicators |
+| `/inventory/orders/inbound` | Register supplier delivery |
+| `/inventory/orders/outbound` | Register consumption or waste exit |
+| `/inventory/orders` | Read-only inbound/outbound order history |
 | `/account/profile` | View and edit profile |
 | `/account/change-password` | Change password while signed in |
 
@@ -73,6 +77,7 @@ Slate sidebar + white content area — intentionally distinct from the public am
 | Authentication | `services/api` — JWT in `localStorage` |
 | Incident analysis | `services/api` — see [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) |
 | Supplier directory | `services/api` — see [`archive/supplier-directory-plan/`](../../archive/supplier-directory-plan/) |
+| Inventory | `services/api` — see [`archive/ms-5-plan/`](../../archive/ms-5-plan/) |
 | Password reset | `services/api` + Resend — see [`archive/user-authentication-plan/`](../../archive/user-authentication-plan/) |
 
 ## Verify

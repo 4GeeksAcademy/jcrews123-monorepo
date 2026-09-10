@@ -9,6 +9,7 @@ const navItems = [
   { href: "/", label: "Dashboard" },
   { href: "/incidents", label: "Incident Analysis" },
   { href: "/suppliers", label: "Supplier Directory" },
+  { href: "/inventory/products", label: "Inventory" },
   { href: "/account/profile", label: "Profile" },
   { href: "/account/change-password", label: "Change password" },
 ];
@@ -33,7 +34,9 @@ export function SidebarNav() {
             const active =
               item.href === "/"
                 ? pathname === "/"
-                : pathname.startsWith(item.href);
+                : item.href.startsWith("/inventory")
+                  ? pathname.startsWith("/inventory")
+                  : pathname.startsWith(item.href);
             return (
               <li key={item.href}>
                 <Link

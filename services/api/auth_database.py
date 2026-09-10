@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+import uuid
 from pathlib import Path
 from typing import Any
 
@@ -68,8 +69,18 @@ def get_user_by_email(db: TinyDB, email: str) -> dict[str, Any] | None:
 def insert_user(db: TinyDB, data: dict[str, Any]) -> dict[str, Any]:
     table = get_users_table(db)
     payload = {**data, "email": data["email"].lower()}
+    if "uuid" not in payload:
+        payload["uuid"] = str(uuid.uuid4())
     doc_id = table.insert(payload)
     return document_to_dict(doc_id, payload)
+
+
+def ensure_user_uuid(db: TinyDB, user: dict[str, Any]) -> dict[str, Any]:
+    if user.get("uuid"):
+        return user
+    user_uuid = str(uuid.uuid4())
+    updated = update_user(db, user["id"], {"uuid": user_uuid})
+    return updated or {**user, "uuid": user_uuid}
 
 
 def update_user(

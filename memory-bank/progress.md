@@ -63,9 +63,17 @@ _Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffi
 - [x] API tests: 29 passing (`services/api/tests/`)
 - [x] Backoffice lint passing
 
+## Completed (Milestone 5 — Inventory Management)
+
+- [x] **Part 1 (Backend):** SQLModel + Supabase inventory at `/inventory` — `Ingredient`, `IngredientEntry`, `IngredientExit`, dual DB with TinyDB auth, UUID on orders, seed data
+- [x] **Part 2 (Backoffice):** Four authenticated inventory views under `/inventory/*`, centralized `inventory-api.ts`, stock indicators, inbound/outbound forms, order history
+- [x] `archive/ms-5-plan/` — plan, CONTEXT copy, `plan.json`
+- [x] API tests: 37 passing (8 inventory cases)
+- [x] Backoffice lint passing
+
 ## Next (future milestones)
 
-- MS-5: Inventory API under `services/api/` (`/api/v1/inventory`)
+- MS-5: Inventory API under `services/api/` (`/inventory`) — **done**; see `archive/ms-5-plan/`
 - Real-time telemetry and data pipelines under `data/`
 - Product agents under `agents/`
 - Workflows and automations under `workflows/`
