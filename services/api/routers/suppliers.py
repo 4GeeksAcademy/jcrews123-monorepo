@@ -6,6 +6,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, Query
 from tinydb import TinyDB
 
+from core.deps import get_current_user
 from database import (
     delete_supplier,
     get_db,
@@ -40,7 +41,9 @@ def to_response(record: dict) -> SupplierResponse:
 def create_supplier(
     payload: SupplierCreate,
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
 ) -> SupplierResponse:
+    _ = current_user
     data = payload.model_dump()
     data["updated_at"] = utc_now_iso()
     record = insert_supplier(db, data)
@@ -50,9 +53,11 @@ def create_supplier(
 @router.get("", response_model=list[SupplierResponse])
 def list_all_suppliers(
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
     country: str | None = Query(default=None),
     category: str | None = Query(default=None),
 ) -> list[SupplierResponse]:
+    _ = current_user
     records = list_suppliers(db)
 
     if country:
@@ -72,7 +77,9 @@ def list_all_suppliers(
 def get_supplier(
     supplier_id: int,
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
 ) -> SupplierResponse:
+    _ = current_user
     record = get_supplier_by_id(db, supplier_id)
     if record is None:
         raise HTTPException(status_code=404, detail="Supplier not found.")
@@ -84,7 +91,9 @@ def update_supplier_rate(
     supplier_id: int,
     payload: SupplierUpdateRate,
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
 ) -> SupplierResponse:
+    _ = current_user
     record = update_supplier(
         db,
         supplier_id,
@@ -103,7 +112,9 @@ def update_supplier_status(
     supplier_id: int,
     payload: SupplierUpdateStatus,
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
 ) -> SupplierResponse:
+    _ = current_user
     record = update_supplier(
         db,
         supplier_id,
@@ -118,7 +129,9 @@ def update_supplier_status(
 def remove_supplier(
     supplier_id: int,
     db: Annotated[TinyDB, Depends(get_database)],
+    current_user: Annotated[dict, Depends(get_current_user)],
 ) -> dict[str, str]:
+    _ = current_user
     if not delete_supplier(db, supplier_id):
         raise HTTPException(status_code=404, detail="Supplier not found.")
     return {"detail": "Supplier deleted."}

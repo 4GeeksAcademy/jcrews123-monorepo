@@ -1,3 +1,5 @@
+import { apiFetch } from "@/lib/api-client";
+
 export type SupplierStatus = "active" | "suspended";
 
 export type Supplier = {
@@ -24,10 +26,6 @@ export type SupplierCreateInput = {
   notes?: string;
 };
 
-const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ??
-  "http://localhost:8000";
-
 export const SUPPLIER_CATEGORIES = [
   "carne",
   "verduras_y_hortalizas",
@@ -41,18 +39,6 @@ export const SUPPLIER_CATEGORIES = [
 
 export const SUPPLIER_COUNTRIES = ["Colombia", "USA"] as const;
 
-async function parseError(response: Response, fallback: string): Promise<string> {
-  const body = (await response.json().catch(() => null)) as {
-    detail?: string | { msg?: string }[];
-  } | null;
-  if (!body?.detail) return fallback;
-  if (typeof body.detail === "string") return body.detail;
-  if (Array.isArray(body.detail) && body.detail[0]?.msg) {
-    return body.detail[0].msg;
-  }
-  return fallback;
-}
-
 export async function fetchSuppliers(filters?: {
   country?: string;
   category?: string;
@@ -62,56 +48,37 @@ export async function fetchSuppliers(filters?: {
   if (filters?.category) params.set("category", filters.category);
 
   const query = params.toString();
-  const url = query ? `${API_BASE}/suppliers?${query}` : `${API_BASE}/suppliers`;
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(await parseError(response, "Failed to load suppliers."));
-  }
-  return response.json() as Promise<Supplier[]>;
+  const path = query ? `/suppliers?${query}` : "/suppliers";
+  return apiFetch<Supplier[]>(path);
 }
 
 export async function createSupplier(
   input: SupplierCreateInput,
 ): Promise<Supplier> {
-  const response = await fetch(`${API_BASE}/suppliers`, {
+  return apiFetch<Supplier>("/suppliers", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(input),
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "Failed to create supplier."));
-  }
-  return response.json() as Promise<Supplier>;
 }
 
 export async function updateSupplierRate(
   id: number,
   rate_per_unit: number,
 ): Promise<Supplier> {
-  const response = await fetch(`${API_BASE}/suppliers/${id}/rate`, {
+  return apiFetch<Supplier>(`/suppliers/${id}/rate`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ rate_per_unit }),
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "Failed to update rate."));
-  }
-  return response.json() as Promise<Supplier>;
 }
 
 export async function updateSupplierStatus(
   id: number,
   status: SupplierStatus,
 ): Promise<Supplier> {
-  const response = await fetch(`${API_BASE}/suppliers/${id}/status`, {
+  return apiFetch<Supplier>(`/suppliers/${id}/status`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status }),
   });
-  if (!response.ok) {
-    throw new Error(await parseError(response, "Failed to update status."));
-  }
-  return response.json() as Promise<Supplier>;
 }
 
 export function formatCategory(label: string): string {
