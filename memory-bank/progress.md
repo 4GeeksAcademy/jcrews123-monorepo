@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffice UI_
+_Last updated: Company monorepo containerization implemented_
 
 ## Completed
 
@@ -71,6 +71,32 @@ _Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffi
 - [x] API tests: 37 passing (8 inventory cases)
 - [x] Backoffice lint passing
 
+## Completed (Company Monorepo Containerization — syllabus #41)
+
+- [x] One `uis` development container runs website `:3000` and backoffice
+  `:3001` with bind mounts and polling.
+- [x] One `services` container runs FastAPI `:8000` with `uv` and Uvicorn
+  reload.
+- [x] Root Compose orchestration, named `brasaland-dev` network, ignored root
+  environment contract, and Docker build exclusions.
+- [x] Browser-safe `/backend` proxy forwards through Docker DNS to
+  `http://services:8000`.
+- [x] Cross-monorepo build contexts include `apps/operations` and
+  `packages/incident-analysis`.
+- [x] [`archive/containerization-plan/`](../archive/containerization-plan/) —
+  plan, assignment context, verification record, and Docker teaching TLDR.
+- [x] Static YAML validation, API tests (37), backoffice lint, website build,
+  and local API proxy smoke test passed.
+- [x] Docker build, two-container startup, HTTP checks, service-name proxy, and
+  API/UI bind-mount hot reload verified from a non-OneDrive working copy.
+- [x] Containerization audit aligned primary build contexts with `uis/` and
+  `services/`, added lockfile-aware dependency-volume sync, and restored the
+  incident fixture for all 37 API tests.
+- [x] Next.js upgraded from 16.2.10 to 16.3.4 in both UIs to resolve the
+  production dependency audit findings.
+- [ ] Capture the final `docker compose ps` screenshot with the real ignored
+  Supabase environment values.
+
 ## Next (future milestones)
 
 - MS-5: Inventory API under `services/api/` (`/inventory`) — **done**; see `archive/ms-5-plan/`
@@ -82,7 +108,10 @@ _Last updated: Supplier Directory implementation — FastAPI + TinyDB + backoffi
 
 - Attach CLI + backoffice screenshots to the incident analyzer PR before re-grade (template: `archive/incidents-file-analyzer-plan/PR_TEST_PLAN.md`)
 - Root `README.md` still mentions template placeholder status — update after MS-4 merge
-- No `docker-compose.yml` orchestration yet
+- OneDrive Files On-Demand paths expose source files as reparse points that
+  Docker BuildKit rejects; use `C:\dev\jcrews123-monorepo-3` for Docker work
+- Final `docker compose ps` PR screenshot with real Supabase values remains
+  pending
 - Backoffice hash links (`#locations`, `#departments`) on dashboard only — no separate routes yet
 - Python runtime required locally for `scripts/analyze.py` and `services/api/` (`pip install -r services/api/requirements.txt` + editable `packages/incident-analysis`)
 

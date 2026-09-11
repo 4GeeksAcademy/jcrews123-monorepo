@@ -7,7 +7,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 _API_DIR = Path(__file__).resolve().parent
-load_dotenv(_API_DIR / ".env", override=True)
+load_dotenv(_API_DIR / ".env", override=False)
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
