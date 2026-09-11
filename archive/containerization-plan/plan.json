@@ -1,0 +1,43 @@
+{
+  "name": "Brasaland Company Monorepo Containerization",
+  "version": "1.0.0",
+  "status": "implemented",
+  "overview": "Two-container Docker Compose development environment for both Next.js UIs and the FastAPI API, plus a repository-specific teaching guide.",
+  "implementationRoot": "docker-compose.yml, uis, services",
+  "branch": "current",
+  "stack": {
+    "ui": "Node Alpine + Next.js 16",
+    "api": "Python slim + uv + FastAPI/Uvicorn",
+    "database": "Hosted Supabase PostgreSQL",
+    "orchestration": "Docker Compose v2"
+  },
+  "ports": {
+    "website": 3000,
+    "backoffice": 3001,
+    "api": 8000
+  },
+  "network": "brasaland-dev",
+  "deliverables": [
+    "archive/containerization-plan/containerization-plan.md",
+    "archive/containerization-plan/containerization-CONTEXT.md",
+    "archive/containerization-plan/plan.json",
+    "archive/containerization-plan/DOCKER_TLDR.md",
+    "uis/Dockerfile",
+    "uis/.dockerignore",
+    "uis/start.sh",
+    "services/Dockerfile",
+    "services/.dockerignore",
+    "docker-compose.yml",
+    ".dockerignore",
+    ".gitattributes",
+    ".env.example",
+    "uis/backoffice/next.config.ts",
+    "uis/backoffice/lib/api-client.ts",
+    "uis/backoffice/.env.local.example",
+    "uis/backoffice/README.md",
+    "services/api/main.py",
+    "services/api/seed.py",
+    "README.md",
+    "memory-bank/progress.md"
+  ]
+}

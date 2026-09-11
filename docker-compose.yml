@@ -1,0 +1,88 @@
+name: brasaland
+
+services:
+  services:
+    build:
+      context: ./services
+      dockerfile: Dockerfile
+      additional_contexts:
+        incident-analysis: ./packages/incident-analysis
+    env_file:
+      - .env
+    command:
+      [
+        "python",
+        "-m",
+        "uvicorn",
+        "main:app",
+        "--host",
+        "0.0.0.0",
+        "--port",
+        "8000",
+        "--reload",
+      ]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./services/api:/workspace/services/api
+      - ./packages/incident-analysis:/workspace/packages/incident-analysis
+      - ./scripts/incidents-brasaland.csv:/workspace/scripts/incidents-brasaland.csv:ro
+    networks:
+      - brasaland-dev
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')",
+        ]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+
+  uis:
+    build:
+      context: ./uis
+      dockerfile: Dockerfile
+      additional_contexts:
+        operations: ./apps/operations
+    env_file:
+      - .env
+    environment:
+      INTERNAL_API_URL: ${INTERNAL_API_URL:-http://services:8000}
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/backend}
+      WATCHPACK_POLLING: ${WATCHPACK_POLLING:-true}
+    command:
+      [
+        "sh",
+        "-c",
+        "cp /workspace/uis/start.sh /tmp/start.sh && dos2unix /tmp/start.sh && exec sh /tmp/start.sh",
+      ]
+    depends_on:
+      services:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+    volumes:
+      - ./uis:/workspace/uis
+      - ./apps/operations:/workspace/apps/operations
+      - website-node-modules:/workspace/uis/website/node_modules
+      - website-next:/workspace/uis/website/.next
+      - backoffice-node-modules:/workspace/uis/backoffice/node_modules
+      - backoffice-next:/workspace/uis/backoffice/.next
+    networks:
+      - brasaland-dev
+
+networks:
+  brasaland-dev:
+    name: brasaland-dev
+    driver: bridge
+
+volumes:
+  website-node-modules:
+  website-next:
+  backoffice-node-modules:
+  backoffice-next:

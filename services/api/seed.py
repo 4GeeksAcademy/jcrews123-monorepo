@@ -5,7 +5,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 _API_DIR = Path(__file__).resolve().parent
-load_dotenv(_API_DIR / ".env", override=True)
+load_dotenv(_API_DIR / ".env", override=False)
 
 from database import find_by_name_country, get_db, insert_supplier
 from inventory_seed import seed_inventory

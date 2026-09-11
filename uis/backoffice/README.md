@@ -13,7 +13,7 @@ Internal dashboard for **Brasaland Digital** — company KPIs, location network,
 ```bash
 cd uis/backoffice
 npm install
-cp .env.local.example .env.local   # optional; defaults API to localhost:8000
+cp .env.local.example .env.local   # optional; defaults to the /backend proxy
 ```
 
 ## Run
@@ -62,7 +62,8 @@ Register at `/register` or sign in at `/login`. JWT is stored in `localStorage` 
 
 | Variable | Default | Purpose |
 |----------|---------|---------|
-| `NEXT_PUBLIC_API_URL` | `http://localhost:8000` | FastAPI base URL |
+| `NEXT_PUBLIC_API_URL` | `/backend` | Browser-facing same-origin API prefix |
+| `INTERNAL_API_URL` | `http://localhost:8000` | Next.js proxy destination; Docker uses `http://services:8000` |
 
 ## Layout
 

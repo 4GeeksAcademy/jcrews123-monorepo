@@ -21,12 +21,55 @@ This repository is the **starter template** for transversal projects. You will w
 
 ## How to start
 
-1. **Use this repository as a template** and create your own project repo.
-2. **Clone** your repository (or open it in Codespaces).
-3. **Replace** `CONTEXT.md` with the full context for your assigned company.
-4. **Read this folder guide** and open the `README.md` of the folder you are working in.
-5. **Start implementing** in the right folder — do not dump everything in the root.
-6. **Document** what you add: each new app, service, agent, or pipeline gets a subfolder + README.
+The canonical development environment uses Docker Compose. Install Docker
+Desktop (or Docker Engine with Compose v2), then run from the repository root:
+
+> **Windows:** keep the repository outside OneDrive Files On-Demand folders.
+> OneDrive reparse-point files cause Docker BuildKit errors such as
+> `invalid file request apps/operations/README.md`.
+
+```bash
+cp .env.example .env
+# Add your local SECRET_KEY, DATABASE_URL, and optional Resend values to .env.
+docker compose up --build
+```
+
+PowerShell equivalent: `Copy-Item .env.example .env`.
+
+Existing Brasaland checkouts can retain `services/api/.env` as a local fallback
+while moving values into the root `.env`. Neither file is committed.
+
+| Application | URL |
+|-------------|-----|
+| Public website | http://localhost:3000 |
+| Backoffice | http://localhost:3001 |
+| FastAPI docs | http://localhost:8000/docs |
+| FastAPI health | http://localhost:8000/health |
+
+Both Next.js applications run in one `uis` container. FastAPI runs in the
+`services` container. Source directories are bind-mounted, so normal code
+changes reload without rebuilding the images.
+
+### Docker commands
+
+```bash
+docker compose config                     # validate configuration
+docker compose up --build -d              # build and start
+docker compose ps                         # show status and ports
+docker compose logs -f                    # follow logs
+docker compose exec services python seed.py  # seed suppliers/inventory
+docker compose exec services python -m pytest tests
+docker compose down                       # stop
+```
+
+The host browser calls backoffice through `/backend/*`. Next.js proxies those
+requests to `http://services:8000` on the private `brasaland-dev` network.
+Docker service names work between containers; host browsers use published
+`localhost` ports.
+
+Dependency or Dockerfile changes require a rebuild. Source changes do not.
+See [`archive/containerization-plan/DOCKER_TLDR.md`](./archive/containerization-plan/DOCKER_TLDR.md)
+for the architecture, teaching notes, and troubleshooting guide.
 
 ---
 
