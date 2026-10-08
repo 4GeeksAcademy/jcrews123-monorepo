@@ -30,7 +30,7 @@ Desktop (or Docker Engine with Compose v2), then run from the repository root:
 
 ```bash
 cp .env.example .env
-# Add your local SECRET_KEY, DATABASE_URL, and optional Resend values to .env.
+# Set SECRET_KEY, DATABASE_URL (postgresql+psycopg2://… from Supabase pooler), and optional Resend keys.
 docker compose up --build
 ```
 

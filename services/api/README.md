@@ -45,7 +45,9 @@ FastAPI service for Brasaland Digital. Exposes:
 
 ## Environment
 
-Copy `.env.example` to `.env` in this folder:
+**Docker Compose:** use the repo root [`.env.example`](../../.env.example) → `.env`. Compose injects those variables into the `services` container; `main.py` also loads this folder’s `.env` with `override=False`, so root wins for duplicate keys.
+
+**Local uvicorn (no Docker):** copy `.env.example` to `.env` in this folder and mirror the same backend values as root.
 
 | Variable | Purpose |
 |----------|---------|
@@ -55,7 +57,7 @@ Copy `.env.example` to `.env` in this folder:
 | `FRONTEND_RESET_URL` | Backoffice reset page base URL |
 | `RESEND_API_KEY` | Resend API key for reset emails |
 | `RESEND_FROM_EMAIL` | Verified sender address |
-| `DATABASE_URL` | Supabase PostgreSQL connection string (Transaction pooler URI) |
+| `DATABASE_URL` | Supabase URI — use **`postgresql+psycopg2://`** (transaction pooler from Docker on Windows; encode special characters in the password) |
 
 **Dual database:** TinyDB (`users.json`) for auth; Supabase for inventory via SQLModel. Stock is computed from inbound minus outbound orders — never stored directly on ingredients.
 
@@ -80,6 +82,20 @@ pip install -r requirements.txt
 pip install -e ../../packages/incident-analysis
 uv run seed
 python -m uvicorn main:app --reload --port 8000
+```
+
+## Tests
+
+From this directory (uses isolated SQLite + temp TinyDB via `tests/conftest.py`):
+
+```bash
+python -m pytest tests/ -q
+```
+
+Docker (same suite, Python 3.13 in the image):
+
+```bash
+docker compose run --rm -w /workspace/services/api services python -m pytest tests/ -q
 ```
 
 Open http://localhost:8000/docs for Swagger UI. Register via `POST /users`, login via `POST /auth/login`, then use **Authorize** with the Bearer token.

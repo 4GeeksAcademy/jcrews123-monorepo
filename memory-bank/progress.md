@@ -1,6 +1,6 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Company monorepo containerization implemented_
+_Last updated: Post-audit remediation (env docs, build, typecheck, local pytest)_
 
 ## Completed
 
@@ -70,6 +70,14 @@ _Last updated: Company monorepo containerization implemented_
 - [x] `archive/ms-5-plan/` — plan, CONTEXT copy, `plan.json`
 - [x] API tests: 37 passing (8 inventory cases)
 - [x] Backoffice lint passing
+
+## Completed (Post-audit remediation)
+
+- [x] Backoffice `/reset-password` — `useSearchParams` wrapped in `Suspense`; `npm run build` passes
+- [x] `apps/operations` — `tsc --noEmit` passes (`moduleResolution: Bundler`)
+- [x] `services/api` — password hashing via `bcrypt` (Python 3.14–compatible); 37/37 pytest local + Docker
+- [x] API tests — removed duplicate `client` fixtures in incidents/suppliers modules (use `conftest` SQLite)
+- [x] Env documentation — root vs `services/api/.env.example`, `postgresql+psycopg2://` notes
 
 ## Completed (Company Monorepo Containerization — syllabus #41)
 

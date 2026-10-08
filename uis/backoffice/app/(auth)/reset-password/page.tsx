@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 
 import { AuthFormShell } from "@/components/auth/AuthFormShell";
 import { resetPassword } from "@/lib/password-reset-api";
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token") ?? "";
@@ -90,5 +90,22 @@ export default function ResetPasswordPage() {
         </button>
       </form>
     </AuthFormShell>
+  );
+}
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense
+      fallback={
+        <AuthFormShell
+          title="Set new password"
+          subtitle="Choose a new password for your Brasaland Digital account."
+        >
+          <p className="text-sm text-slate-400">Loading…</p>
+        </AuthFormShell>
+      }
+    >
+      <ResetPasswordForm />
+    </Suspense>
   );
 }
