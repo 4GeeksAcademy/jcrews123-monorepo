@@ -23,3 +23,9 @@ def get_database_url() -> str:
     if not url:
         raise RuntimeError("DATABASE_URL environment variable is required.")
     return url
+
+
+def get_telemetry_endpoint() -> str:
+    return os.environ.get(
+        "TELEMETRY_ENDPOINT", "http://localhost:8000/telemetry/events"
+    )

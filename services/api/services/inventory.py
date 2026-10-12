@@ -15,6 +15,33 @@ from schemas.inventory import (
     OutboundOrderCreate,
 )
 
+PRICE_VARIANCE_THRESHOLD = Decimal("10")
+
+
+def location_country_currency(location_id: int) -> tuple[str, str]:
+    if 1 <= location_id <= 10:
+        return ("CO", "COP")
+    if 11 <= location_id <= 14:
+        return ("US", "USD")
+    raise HTTPException(status_code=422, detail="Location must be between 1 and 14.")
+
+
+def validate_location_market(
+    ingredient: Ingredient, location_id: int, currency: str | None = None
+) -> tuple[str, str]:
+    country, expected_currency = location_country_currency(location_id)
+    if ingredient.country != country:
+        raise HTTPException(
+            status_code=422,
+            detail="Ingredient country does not match the selected location.",
+        )
+    if currency is not None and currency != expected_currency:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Location {location_id} requires currency {expected_currency}.",
+        )
+    return country, expected_currency
+
 
 def compute_current_stock(session: Session, ingredient_id: int) -> Decimal:
     inbound = session.exec(
@@ -40,6 +67,7 @@ def ingredient_to_response(session: Session, ingredient: Ingredient) -> Ingredie
         category=ingredient.category,
         country=ingredient.country,
         current_stock=stock,
+        min_stock=ingredient.min_stock,
     )
 
 
@@ -87,10 +115,35 @@ def create_inbound_order(
     session: Session, payload: InboundOrderCreate, user_uuid: str
 ) -> InventoryOrderResponse:
     ingredient = get_ingredient_or_404(session, payload.ingredient_id)
+    country, currency = validate_location_market(
+        ingredient, payload.location_id, payload.currency.value
+    )
+    previous = session.exec(
+        select(IngredientEntry)
+        .where(
+            IngredientEntry.ingredient_id == ingredient.id,
+            IngredientEntry.supplier_name == payload.supplier_name,
+            IngredientEntry.currency == currency,
+            IngredientEntry.unit_cost.is_not(None),  # type: ignore[union-attr]
+        )
+        .order_by(IngredientEntry.created_at.desc())
+    ).first()
+    previous_cost = previous.unit_cost if previous is not None else None
+    variance_percent = (
+        ((payload.unit_cost - previous_cost) / previous_cost * Decimal("100"))
+        if previous_cost
+        else None
+    )
+    variance_detected = (
+        variance_percent is not None
+        and abs(variance_percent) > PRICE_VARIANCE_THRESHOLD
+    )
     entry = IngredientEntry(
         ingredient_id=ingredient.id,  # type: ignore[arg-type]
         quantity=payload.quantity,
         supplier_name=payload.supplier_name,
+        unit_cost=payload.unit_cost,
+        currency=currency,
         location_id=payload.location_id,
         user_uuid=user_uuid,
     )
@@ -102,11 +155,21 @@ def create_inbound_order(
         order_type="inbound",
         ingredient_id=ingredient.id,  # type: ignore[arg-type]
         product_name=ingredient.name,
+        product_category=ingredient.category,
+        unit=ingredient.unit,
+        country=country,
+        currency=currency,
         quantity=entry.quantity,
         user_uuid=entry.user_uuid,
         created_at=entry.created_at,
         location_id=entry.location_id,
         supplier_name=entry.supplier_name,
+        unit_cost=entry.unit_cost,
+        previous_unit_cost=previous_cost,
+        variance_percent=variance_percent,
+        price_variance_detected=variance_detected,
+        min_stock=ingredient.min_stock,
+        stock_after=compute_current_stock(session, ingredient.id),  # type: ignore[arg-type]
     )
 
 
@@ -114,6 +177,7 @@ def create_outbound_order(
     session: Session, payload: OutboundOrderCreate, user_uuid: str
 ) -> InventoryOrderResponse:
     ingredient = lock_ingredient(session, payload.ingredient_id)
+    country, currency = validate_location_market(ingredient, payload.location_id)
     available = compute_current_stock(session, ingredient.id)  # type: ignore[arg-type]
     if payload.quantity > available:
         raise HTTPException(
@@ -128,22 +192,35 @@ def create_outbound_order(
         ingredient_id=ingredient.id,  # type: ignore[arg-type]
         quantity=payload.quantity,
         reason=payload.reason.value,
+        waste_reason=payload.waste_reason.value if payload.waste_reason else None,
         location_id=payload.location_id,
         user_uuid=user_uuid,
     )
     session.add(exit_row)
     session.commit()
     session.refresh(exit_row)
+    stock_after = available - payload.quantity
+    threshold_triggered = (
+        available >= ingredient.min_stock and stock_after < ingredient.min_stock
+    )
     return InventoryOrderResponse(
         id=exit_row.id,  # type: ignore[arg-type]
         order_type="outbound",
         ingredient_id=ingredient.id,  # type: ignore[arg-type]
         product_name=ingredient.name,
+        product_category=ingredient.category,
+        unit=ingredient.unit,
+        country=country,
+        currency=currency,
         quantity=exit_row.quantity,
         user_uuid=exit_row.user_uuid,
         created_at=exit_row.created_at,
         location_id=exit_row.location_id,
         reason=exit_row.reason,
+        waste_reason=exit_row.waste_reason,
+        min_stock=ingredient.min_stock,
+        stock_after=stock_after,
+        threshold_triggered=threshold_triggered,
     )
 
 
@@ -167,11 +244,19 @@ def list_orders(session: Session) -> list[InventoryOrderResponse]:
                 order_type="inbound",
                 ingredient_id=ingredient.id,  # type: ignore[arg-type]
                 product_name=ingredient.name,
+                product_category=ingredient.category,
+                unit=ingredient.unit,
+                country=location_country_currency(entry.location_id)[0],
+                currency=entry.currency
+                or location_country_currency(entry.location_id)[1],
                 quantity=entry.quantity,
                 user_uuid=entry.user_uuid,
                 created_at=entry.created_at,
                 location_id=entry.location_id,
                 supplier_name=entry.supplier_name,
+                unit_cost=entry.unit_cost,
+                min_stock=ingredient.min_stock,
+                stock_after=compute_current_stock(session, ingredient.id),  # type: ignore[arg-type]
             )
         )
     for exit_row, ingredient in exits:
@@ -181,11 +266,18 @@ def list_orders(session: Session) -> list[InventoryOrderResponse]:
                 order_type="outbound",
                 ingredient_id=ingredient.id,  # type: ignore[arg-type]
                 product_name=ingredient.name,
+                product_category=ingredient.category,
+                unit=ingredient.unit,
+                country=location_country_currency(exit_row.location_id)[0],
+                currency=location_country_currency(exit_row.location_id)[1],
                 quantity=exit_row.quantity,
                 user_uuid=exit_row.user_uuid,
                 created_at=exit_row.created_at,
                 location_id=exit_row.location_id,
                 reason=exit_row.reason,
+                waste_reason=exit_row.waste_reason,
+                min_stock=ingredient.min_stock,
+                stock_after=compute_current_stock(session, ingredient.id),  # type: ignore[arg-type]
             )
         )
 

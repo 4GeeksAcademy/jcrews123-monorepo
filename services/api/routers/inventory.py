@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Annotated
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlmodel import Session
 
 from core.deps import get_current_user, get_db, get_user_uuid
@@ -12,6 +12,7 @@ from schemas.inventory import (
     IngredientResponse,
     InventoryOrderResponse,
     OutboundOrderCreate,
+    StockEditAttempt,
 )
 from services import inventory as inventory_service
 
@@ -45,6 +46,21 @@ def get_product(
 ) -> IngredientResponse:
     _ = current_user
     return inventory_service.get_ingredient(session, ingredient_id)
+
+
+@router.patch("/products/{ingredient_id}/stock", status_code=403)
+def reject_direct_stock_edit(
+    ingredient_id: int,
+    payload: StockEditAttempt,
+    session: Annotated[Session, Depends(get_db)],
+    current_user: Annotated[dict, Depends(get_current_user)],
+) -> dict[str, str]:
+    _ = payload, current_user
+    inventory_service.get_ingredient_or_404(session, ingredient_id)
+    raise HTTPException(
+        status_code=403,
+        detail="Stock cannot be edited directly; use an inbound or outbound order.",
+    )
 
 
 @router.post("/orders/inbound", response_model=InventoryOrderResponse, status_code=201)

@@ -16,6 +16,7 @@ COPY --from=incident-analysis incident_analysis ./packages/incident-analysis/inc
 RUN uv pip install --no-cache --editable packages/incident-analysis
 
 COPY api ./services/api
+COPY telemetry ./services/telemetry
 
 WORKDIR /workspace/services/api
 

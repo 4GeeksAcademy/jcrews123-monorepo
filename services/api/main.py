@@ -17,12 +17,14 @@ from fastapi.middleware.cors import CORSMiddleware
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(_REPO_ROOT / "packages" / "incident-analysis"))
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(_REPO_ROOT / "services" / "telemetry"))
 
 from routers.auth import router as auth_router  # noqa: E402
 from routers.incidents import router as incidents_router  # noqa: E402
 from routers.inventory import router as inventory_router  # noqa: E402
 from routers.profiles import router as profiles_router  # noqa: E402
 from routers.suppliers import router as suppliers_router  # noqa: E402
+from routers.telemetry import router as telemetry_router  # noqa: E402
 from routers.users import router as users_router  # noqa: E402
 
 app = FastAPI(
@@ -48,6 +50,7 @@ app.include_router(profiles_router)
 app.include_router(incidents_router)
 app.include_router(suppliers_router)
 app.include_router(inventory_router)
+app.include_router(telemetry_router)
 
 
 @app.on_event("startup")

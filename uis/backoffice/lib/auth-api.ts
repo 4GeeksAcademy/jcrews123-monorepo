@@ -1,5 +1,6 @@
 import { API_BASE, apiFetch, parseApiError } from "@/lib/api-client";
 import { clearStoredToken, setStoredToken } from "@/lib/auth-storage";
+import { setTelemetryUser, track } from "@/lib/telemetry";
 
 export type UserRole = "admin" | "manager" | "user";
 
@@ -25,14 +26,21 @@ export type RegisterInput = {
   address?: string;
 };
 
-export async function login(email: string, password: string): Promise<void> {
-  const response = await fetch(`${API_BASE}/auth/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
-  });
+export async function login(email: string, password: string): Promise<AuthUser> {
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+  } catch (error) {
+    track("user_login_failed", { failure_reason: "network_error" });
+    throw error;
+  }
 
   if (!response.ok) {
+    track("user_login_failed", { failure_reason: "invalid_credentials" });
     throw new Error(
       await parseApiError(response, "Incorrect email or password."),
     );
@@ -40,6 +48,10 @@ export async function login(email: string, password: string): Promise<void> {
 
   const data = (await response.json()) as { access_token: string };
   setStoredToken(data.access_token);
+  const user = await fetchCurrentUser();
+  setTelemetryUser(String(user.profile.user_id));
+  track("user_login_succeeded", { auth_method: "password" });
+  return user;
 }
 
 export async function register(input: RegisterInput): Promise<void> {
@@ -70,5 +82,6 @@ export async function updateProfile(input: {
 }
 
 export function logout(): void {
+  setTelemetryUser(null);
   clearStoredToken();
 }

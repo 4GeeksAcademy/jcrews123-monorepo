@@ -1,16 +1,19 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   LOCATION_IDS,
   createOutboundOrder,
   fetchIngredient,
   fetchIngredients,
+  marketForLocation,
   type ExitReason,
   type Ingredient,
+  type WasteReason,
 } from "@/lib/inventory-api";
+import { track } from "@/lib/telemetry";
 
 export function OutboundOrderForm() {
   const searchParams = useSearchParams();
@@ -21,11 +24,26 @@ export function OutboundOrderForm() {
   const [availableStock, setAvailableStock] = useState<number | null>(null);
   const [quantity, setQuantity] = useState("");
   const [reason, setReason] = useState<ExitReason>("consumption");
+  const [wasteReason, setWasteReason] = useState<WasteReason>("expired");
   const [locationId, setLocationId] = useState("1");
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
+  const dirtyRef = useRef(false);
+  const completedRef = useRef(false);
+
+  useEffect(
+    () => () => {
+      if (dirtyRef.current && !completedRef.current) {
+        track("inventory_flow_abandoned", {
+          form: "outbound_order",
+          stage: "details_entered",
+        });
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
     let ignore = false;
@@ -97,18 +115,66 @@ export function OutboundOrderForm() {
 
     const parsedQuantity = Number(quantity);
     if (!Number.isFinite(parsedQuantity) || parsedQuantity <= 0) {
+      track("inventory_validation_failed", {
+        form: "outbound_order",
+        field: "quantity",
+        error_code: "not_positive",
+      });
       setError("Quantity must be greater than zero.");
+      setSubmitting(false);
+      return;
+    }
+    const selected = ingredients.find(
+      (ingredient) => ingredient.id === Number(ingredientId),
+    );
+    const market = marketForLocation(Number(locationId));
+    if (!selected || selected.country !== market.country) {
+      track("inventory_validation_failed", {
+        form: "outbound_order",
+        field: "location_id",
+        error_code: "country_mismatch",
+      });
+      setError("Selected ingredient and location must be in the same country.");
       setSubmitting(false);
       return;
     }
 
     try {
-      await createOutboundOrder({
+      const order = await createOutboundOrder({
         ingredient_id: Number(ingredientId),
         quantity: parsedQuantity,
         reason,
+        waste_reason: reason === "waste" ? wasteReason : undefined,
         location_id: Number(locationId),
       });
+      const common = {
+        location_id: order.location_id,
+        country: order.country,
+        product_id: order.ingredient_id,
+        product_category: order.product_category,
+        quantity: order.quantity,
+        unit: order.unit,
+        currency: order.currency,
+      };
+      if (reason === "waste") {
+        track("stock_waste_registered", {
+          ...common,
+          reason: order.waste_reason ?? wasteReason,
+        });
+      } else {
+        track("outbound_order_created", {
+          ...common,
+          reason: "consumption",
+        });
+      }
+      if (order.threshold_triggered) {
+        track("stock_threshold_triggered", {
+          ...common,
+          min_stock: order.min_stock,
+          stock_after: order.stock_after,
+        });
+      }
+      completedRef.current = true;
       setSuccess("Exit registered successfully.");
       setQuantity("");
       const refreshed = await fetchIngredient(Number(ingredientId));
@@ -164,7 +230,11 @@ export function OutboundOrderForm() {
           step="0.001"
           required
           value={quantity}
-          onChange={(event) => setQuantity(event.target.value)}
+          onChange={(event) => {
+            dirtyRef.current = true;
+            completedRef.current = false;
+            setQuantity(event.target.value);
+          }}
           className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
         />
       </label>
@@ -193,6 +263,24 @@ export function OutboundOrderForm() {
           <option value="waste">Waste</option>
         </select>
       </label>
+
+      {reason === "waste" ? (
+        <label className="block text-sm text-slate-700">
+          Waste reason
+          <select
+            required
+            value={wasteReason}
+            onChange={(event) =>
+              setWasteReason(event.target.value as WasteReason)
+            }
+            className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
+          >
+            <option value="expired">Expired product</option>
+            <option value="kitchen_error">Kitchen error</option>
+            <option value="theft_suspected">Loss or suspected theft</option>
+          </select>
+        </label>
+      ) : null}
 
       <label className="block text-sm text-slate-700">
         Location (1–14)

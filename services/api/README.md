@@ -6,6 +6,7 @@ FastAPI service for Brasaland Digital. Exposes:
 - **Supplier Directory** (syllabus #29) — TinyDB CRUD at `/suppliers`
 - **Authentication** (syllabus #30–#32) — JWT users/profiles, protected routes, password reset
 - **Inventory Management** (syllabus MS-5) — SQLModel + Supabase ingredients/orders at `/inventory`
+- **Telemetry** (syllabus #45–#48) — validated batch ingestion, Supabase storage, and cached technical reporting
 
 **Archives:** [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) · [`archive/supplier-directory-plan/`](../../archive/supplier-directory-plan/) · [`archive/user-authentication-plan/`](../../archive/user-authentication-plan/) · [`archive/ms-5-plan/`](../../archive/ms-5-plan/)
 
@@ -40,6 +41,9 @@ FastAPI service for Brasaland Digital. Exposes:
 | `POST` | `/inventory/orders/inbound` | Bearer | Register delivery (`IngredientEntry`) |
 | `POST` | `/inventory/orders/outbound` | Bearer | Register consumption/waste exit |
 | `GET` | `/inventory/orders` | Bearer | Order history with product names |
+| `PATCH` | `/inventory/products/{id}/stock` | Bearer | Reject direct stock edits (traceability control) |
+| `POST` | `/telemetry/events` | Public | Validate and bulk-store a telemetry batch |
+| `GET` | `/telemetry/report` | Bearer | Cached technical metrics for a UTC period |
 
 > Incident paths use `/api/incidents/*` for grading compatibility. Supplier and inventory paths use flat prefixes per syllabus.
 
@@ -58,8 +62,11 @@ FastAPI service for Brasaland Digital. Exposes:
 | `RESEND_API_KEY` | Resend API key for reset emails |
 | `RESEND_FROM_EMAIL` | Verified sender address |
 | `DATABASE_URL` | Supabase URI — use **`postgresql+psycopg2://`** (transaction pooler from Docker on Windows; encode special characters in the password) |
+| `TELEMETRY_ENDPOINT` | Declared ingestion URL; defaults to `http://localhost:8000/telemetry/events` |
 
-**Dual database:** TinyDB (`users.json`) for auth; Supabase for inventory via SQLModel. Stock is computed from inbound minus outbound orders — never stored directly on ingredients.
+**Dual database:** TinyDB (`users.json`) for auth; Supabase for inventory and telemetry. Stock is computed from inbound minus outbound orders — never stored directly on ingredients.
+
+Before using telemetry against Supabase, apply the SQL in `migrations/20261012_inventory_telemetry_fields.sql` and `migrations/20261012_create_telemetry_events.sql`. The API uses one bulk insert per telemetry batch; it never updates or deletes telemetry rows.
 
 **Resend dev note:** With `onboarding@resend.dev`, Resend only delivers to the email address verified on your Resend account. To test with another address, verify a domain at [resend.com/domains](https://resend.com/domains) and use a `from` address on that domain. If email delivery fails, the API logs a **local dev reset link** in the terminal.
 

@@ -4,13 +4,16 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import {
+  attemptDirectStockEdit,
   fetchIngredients,
+  marketForLocation,
   stockStatus,
   type Ingredient,
 } from "@/lib/inventory-api";
+import { track } from "@/lib/telemetry";
 
-function stockBadge(stock: number) {
-  const status = stockStatus(stock);
+function stockBadge(stock: number, minStock: number) {
+  const status = stockStatus(stock, minStock);
   if (status === "critical") {
     return (
       <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-800">
@@ -36,6 +39,47 @@ export function InventoryProductsPanel() {
   const [ingredients, setIngredients] = useState<Ingredient[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
+
+  const attemptStockAdjustment = async (ingredient: Ingredient) => {
+    const quantity = Number(window.prompt("Requested stock level"));
+    const defaultLocation = ingredient.country === "CO" ? 1 : 11;
+    const locationId = Number(
+      window.prompt("Location ID (1–14)", String(defaultLocation)),
+    );
+    if (
+      !Number.isFinite(quantity) ||
+      quantity <= 0 ||
+      !Number.isInteger(locationId) ||
+      locationId < 1 ||
+      locationId > 14
+    ) {
+      track("inventory_validation_failed", {
+        form: "stock_adjustment",
+        field: "quantity",
+        error_code: "invalid_adjustment",
+      });
+      return;
+    }
+    const market = marketForLocation(locationId);
+    try {
+      await attemptDirectStockEdit(ingredient.id, quantity, locationId);
+    } catch {
+      track("direct_stock_edit_rejected", {
+        location_id: locationId,
+        country: market.country,
+        product_id: ingredient.id,
+        product_category: ingredient.category,
+        quantity,
+        unit: ingredient.unit,
+        currency: market.currency,
+        rejection_reason: "order_required",
+      });
+      setNotice(
+        "Direct edits are blocked. Register an inbound or outbound order instead.",
+      );
+    }
+  };
 
   useEffect(() => {
     let ignore = false;
@@ -86,6 +130,11 @@ export function InventoryProductsPanel() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+      {notice ? (
+        <p className="border-b border-indigo-100 bg-indigo-50 px-4 py-3 text-sm text-indigo-800">
+          {notice}
+        </p>
+      ) : null}
       <table className="min-w-full divide-y divide-slate-200 text-sm">
         <thead className="bg-slate-50 text-left text-xs font-semibold uppercase tracking-wide text-slate-500">
           <tr>
@@ -112,7 +161,9 @@ export function InventoryProductsPanel() {
               <td className="px-4 py-3 text-slate-900">
                 {ingredient.current_stock} {ingredient.unit}
               </td>
-              <td className="px-4 py-3">{stockBadge(ingredient.current_stock)}</td>
+              <td className="px-4 py-3">
+                {stockBadge(ingredient.current_stock, ingredient.min_stock)}
+              </td>
               <td className="px-4 py-3">
                 <div className="flex gap-2">
                   <Link
@@ -127,6 +178,13 @@ export function InventoryProductsPanel() {
                   >
                     Outbound
                   </Link>
+                  <button
+                    type="button"
+                    onClick={() => void attemptStockAdjustment(ingredient)}
+                    className="text-slate-500 hover:text-slate-700"
+                  >
+                    Adjust stock
+                  </button>
                 </div>
               </td>
             </tr>

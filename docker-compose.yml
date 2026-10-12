@@ -25,6 +25,7 @@ services:
       - "8000:8000"
     volumes:
       - ./services/api:/workspace/services/api
+      - ./services/telemetry:/workspace/services/telemetry
       - ./packages/incident-analysis:/workspace/packages/incident-analysis
       - ./scripts/incidents-brasaland.csv:/workspace/scripts/incidents-brasaland.csv:ro
     networks:
@@ -53,6 +54,7 @@ services:
     environment:
       INTERNAL_API_URL: ${INTERNAL_API_URL:-http://services:8000}
       NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-/backend}
+      NEXT_PUBLIC_TELEMETRY_ENDPOINT: ${NEXT_PUBLIC_TELEMETRY_ENDPOINT:-/backend/telemetry/events}
       WATCHPACK_POLLING: ${WATCHPACK_POLLING:-true}
     command:
       [

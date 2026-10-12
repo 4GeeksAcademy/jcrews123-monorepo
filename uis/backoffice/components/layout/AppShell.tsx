@@ -105,6 +105,21 @@ export function OrdersHistoryHeader() {
   );
 }
 
+export function TelemetryHeader() {
+  return (
+    <header className="border-b border-slate-200 bg-white px-8 py-5">
+      <p className="text-sm font-medium text-indigo-600">Technology</p>
+      <h2 className="mt-1 font-display text-2xl font-semibold text-slate-900">
+        System telemetry
+      </h2>
+      <p className="mt-1 max-w-2xl text-sm text-slate-600">
+        Technical health for event volume, browser/API failures, latency, and
+        authentication. This is not a sales or revenue report.
+      </p>
+    </header>
+  );
+}
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen bg-slate-50">

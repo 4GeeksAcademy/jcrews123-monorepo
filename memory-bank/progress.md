@@ -1,6 +1,18 @@
 # Progress — Brasaland Digital Monorepo
 
-_Last updated: Post-audit remediation (env docs, build, typecheck, local pytest)_
+_Last updated: Telemetry projects #45–#48 implementation_
+
+## In progress (Telemetry series — syllabus #45–#48)
+
+- [x] #45 design — `docs/telemetry/telemetry-plan.md` + 16-event `event-schemas.json`
+- [x] #46 capture — queue/batch/beacon/retry service, six mandatory inventory events, auth/errors/navigation/performance/Web Vitals
+- [x] #47 implementation — append-only table migration, per-event partial validation, one bulk insert per batch
+- [x] #48 implementation — four Pandas metrics, cached report endpoint, protected `/telemetry` backoffice page
+- [x] Local verification — 45 API tests, backoffice lint, and production build pass
+- [ ] Apply the two tracked migrations to Supabase (configured MCP is read-only)
+- [ ] Capture DevTools, Supabase row, mixed-batch, report JSON, and dashboard screenshots
+
+Archive and plain-English explanation: [`archive/telemetry-series-plan/`](../archive/telemetry-series-plan/)
 
 ## Completed
 
@@ -120,6 +132,8 @@ _Last updated: Post-audit remediation (env docs, build, typecheck, local pytest)
   Docker BuildKit rejects; use `C:\dev\jcrews123-monorepo-3` for Docker work
 - Final `docker compose ps` PR screenshot with real Supabase values remains
   pending
+- Supabase reports RLS disabled on the existing inventory tables. Do not enable
+  it without first choosing policies; an unplanned change could block API access.
 - Backoffice hash links (`#locations`, `#departments`) on dashboard only — no separate routes yet
 - Python runtime required locally for `scripts/analyze.py` and `services/api/` (`pip install -r services/api/requirements.txt` + editable `packages/incident-analysis`)
 

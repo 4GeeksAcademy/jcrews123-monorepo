@@ -13,6 +13,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "kg",
         "category": "meat",
         "country": "CO",
+        "min_stock": Decimal("15"),
     },
     {
         "name": "Pork ribs",
@@ -20,6 +21,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "kg",
         "category": "meat",
         "country": "US",
+        "min_stock": Decimal("12"),
     },
     {
         "name": "Chimichurri sauce",
@@ -27,6 +29,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "litre",
         "category": "sauce",
         "country": "CO",
+        "min_stock": Decimal("5"),
     },
     {
         "name": "House BBQ sauce",
@@ -34,6 +37,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "litre",
         "category": "sauce",
         "country": "US",
+        "min_stock": Decimal("5"),
     },
     {
         "name": "Yuca (cassava)",
@@ -41,6 +45,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "kg",
         "category": "produce",
         "country": "CO",
+        "min_stock": Decimal("8"),
     },
     {
         "name": "Takeaway box (M)",
@@ -48,6 +53,7 @@ INGREDIENTS_SEED: list[dict[str, str]] = [
         "unit": "unit",
         "category": "packaging",
         "country": "CO",
+        "min_stock": Decimal("20"),
     },
 ]
 
@@ -57,24 +63,32 @@ ENTRY_SEED: list[dict[str, object]] = [
         "sku": "BRS-BEEF-001",
         "quantity": Decimal("50"),
         "supplier_name": "Carnes del Valle S.A.",
+        "unit_cost": Decimal("32000"),
+        "currency": "COP",
         "location_id": 1,
     },
     {
         "sku": "BRS-BEEF-001",
         "quantity": Decimal("30"),
         "supplier_name": "Carnes del Valle S.A.",
+        "unit_cost": Decimal("33500"),
+        "currency": "COP",
         "location_id": 1,
     },
     {
         "sku": "BRS-PORK-001",
         "quantity": Decimal("40"),
         "supplier_name": "MiamiMeat Co.",
-        "location_id": 10,
+        "unit_cost": Decimal("8.50"),
+        "currency": "USD",
+        "location_id": 11,
     },
     {
         "sku": "BRS-SAUCE-001",
         "quantity": Decimal("20"),
         "supplier_name": "Salsas Artesanales Ltda.",
+        "unit_cost": Decimal("18000"),
+        "currency": "COP",
         "location_id": 2,
     },
 ]
@@ -96,6 +110,7 @@ EXIT_SEED: list[dict[str, object]] = [
         "sku": "BRS-BEEF-001",
         "quantity": Decimal("5"),
         "reason": "waste",
+        "waste_reason": "expired",
         "location_id": 1,
     },
 ]

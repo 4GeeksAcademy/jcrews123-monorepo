@@ -23,7 +23,12 @@ def reset_engine() -> None:
 def create_inventory_tables() -> None:
     from models.inventory import Ingredient, IngredientEntry, IngredientExit  # noqa: F401
 
-    SQLModel.metadata.create_all(get_engine())
+    engine = get_engine()
+    SQLModel.metadata.create_all(engine)
+    if engine.dialect.name == "sqlite":
+        from telemetry.store import telemetry_metadata
+
+        telemetry_metadata.create_all(engine)
 
 
 def get_session() -> Session:

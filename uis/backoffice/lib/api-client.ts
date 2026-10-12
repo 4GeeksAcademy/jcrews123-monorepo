@@ -1,4 +1,5 @@
 import { clearStoredToken, getStoredToken } from "@/lib/auth-storage";
+import { setTelemetryUser, track } from "@/lib/telemetry";
 
 export const API_BASE =
   process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "/backend";
@@ -53,12 +54,32 @@ export async function apiFetch<T>(
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(`${API_BASE}${path}`, {
-    ...rest,
-    headers,
+  const method = (rest.method ?? "GET").toUpperCase();
+  const endpoint = path.split("?")[0];
+  const startedAt = performance.now();
+  let response: Response;
+  try {
+    response = await fetch(`${API_BASE}${path}`, {
+      ...rest,
+      headers,
+    });
+  } catch (error) {
+    track("api_request_failed", { endpoint, method, status: 0 });
+    throw error;
+  }
+
+  track("api_latency_recorded", {
+    endpoint,
+    method,
+    duration_ms: Math.max(0, performance.now() - startedAt),
+    status: response.status,
   });
 
   if (response.status === 401 && auth) {
+    track("session_expired", {
+      route: typeof window === "undefined" ? "/" : window.location.pathname,
+    });
+    setTelemetryUser(null);
     clearStoredToken();
     if (typeof window !== "undefined") {
       window.location.href = "/login";
@@ -67,6 +88,11 @@ export async function apiFetch<T>(
   }
 
   if (!response.ok) {
+    track("api_request_failed", {
+      endpoint,
+      method,
+      status: response.status,
+    });
     throw new ApiError(
       await parseApiError(response, `Request failed (${response.status})`),
       response.status,

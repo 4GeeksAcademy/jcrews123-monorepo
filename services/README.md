@@ -9,6 +9,7 @@ Each subfolder is **one service** with its own README, run instructions, and dep
 | Service | Path | Port | Description |
 |---------|------|------|-------------|
 | **Brasaland API** | [`api/`](./api/) | 8000 | FastAPI — incidents, suppliers, auth, inventory (`/inventory`). TinyDB + Supabase dual DB. |
+| **Telemetry analysis** | [`telemetry/`](./telemetry/) | — | Pandas technical metrics consumed by the Brasaland API (`/telemetry/report`). |
 
 See [`api/README.md`](./api/README.md) for setup and endpoints.
 

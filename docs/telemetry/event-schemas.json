@@ -1,0 +1,243 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Brasaland telemetry contract",
+  "schemaVersion": "1.0.0",
+  "envelope": {
+    "required": [
+      "eventId",
+      "timestamp",
+      "sessionId",
+      "userId",
+      "event_type",
+      "schemaVersion",
+      "requestId",
+      "properties"
+    ],
+    "properties": {
+      "eventId": { "type": "string", "format": "uuid" },
+      "timestamp": { "type": "string", "format": "date-time" },
+      "sessionId": { "type": "string", "format": "uuid" },
+      "userId": { "type": ["string", "null"] },
+      "event_type": { "type": "string", "pattern": "^[a-z][a-z0-9]*(_[a-z0-9]+)+$" },
+      "schemaVersion": { "const": "1.0.0" },
+      "requestId": { "type": "string", "format": "uuid" },
+      "properties": { "type": "object" }
+    },
+    "additionalProperties": false
+  },
+  "sharedPropertyDefinitions": {
+    "location_id": { "type": "integer", "minimum": 1, "maximum": 14 },
+    "country": { "type": "string", "enum": ["CO", "US"] },
+    "product_id": { "type": "integer", "minimum": 1 },
+    "product_category": {
+      "type": "string",
+      "enum": ["meat", "produce", "sauce", "beverage", "packaging", "cleaning"]
+    },
+    "quantity": { "type": "number", "exclusiveMinimum": 0 },
+    "unit": { "type": "string", "minLength": 1 },
+    "currency": { "type": "string", "enum": ["COP", "USD"] }
+  },
+  "events": {
+    "inbound_order_created": {
+      "classification": "mandatory",
+      "delivery": "batch",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "supplier_id", "unit_cost"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "supplier_id": { "type": "string", "minLength": 1 },
+        "unit_cost": { "type": "number", "exclusiveMinimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "outbound_order_created": {
+      "classification": "mandatory",
+      "delivery": "batch",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "reason"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "reason": { "const": "consumption" }
+      },
+      "additionalProperties": false
+    },
+    "stock_waste_registered": {
+      "classification": "mandatory",
+      "delivery": "batch",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "reason"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "reason": { "type": "string", "enum": ["expired", "kitchen_error", "theft_suspected"] }
+      },
+      "additionalProperties": false
+    },
+    "stock_threshold_triggered": {
+      "classification": "mandatory",
+      "delivery": "stream",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "min_stock", "stock_after"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "min_stock": { "type": "number", "minimum": 0 },
+        "stock_after": { "type": "number", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "direct_stock_edit_rejected": {
+      "classification": "mandatory",
+      "delivery": "batch",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "rejection_reason"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "rejection_reason": { "const": "order_required" }
+      },
+      "additionalProperties": false
+    },
+    "ingredient_price_variance_detected": {
+      "classification": "mandatory",
+      "delivery": "stream",
+      "required": ["location_id", "country", "product_id", "product_category", "quantity", "unit", "currency", "supplier_id", "unit_cost", "previous_unit_cost", "variance_percent"],
+      "properties": {
+        "location_id": { "$ref": "#/sharedPropertyDefinitions/location_id" },
+        "country": { "$ref": "#/sharedPropertyDefinitions/country" },
+        "product_id": { "$ref": "#/sharedPropertyDefinitions/product_id" },
+        "product_category": { "$ref": "#/sharedPropertyDefinitions/product_category" },
+        "quantity": { "$ref": "#/sharedPropertyDefinitions/quantity" },
+        "unit": { "$ref": "#/sharedPropertyDefinitions/unit" },
+        "currency": { "$ref": "#/sharedPropertyDefinitions/currency" },
+        "supplier_id": { "type": "string", "minLength": 1 },
+        "unit_cost": { "type": "number", "exclusiveMinimum": 0 },
+        "previous_unit_cost": { "type": "number", "exclusiveMinimum": 0 },
+        "variance_percent": { "type": "number" }
+      },
+      "additionalProperties": false
+    },
+    "user_login_succeeded": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["auth_method"],
+      "properties": { "auth_method": { "const": "password" } },
+      "additionalProperties": false
+    },
+    "user_login_failed": {
+      "classification": "identified_opportunity",
+      "delivery": "stream",
+      "required": ["failure_reason"],
+      "properties": {
+        "failure_reason": { "type": "string", "enum": ["invalid_credentials", "session_expired", "network_error"] }
+      },
+      "additionalProperties": false
+    },
+    "session_expired": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["route"],
+      "properties": { "route": { "type": "string", "minLength": 1 } },
+      "additionalProperties": false
+    },
+    "page_viewed": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["route", "section"],
+      "properties": {
+        "route": { "type": "string", "minLength": 1 },
+        "section": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "frontend_error": {
+      "classification": "identified_opportunity",
+      "delivery": "stream",
+      "required": ["error_kind", "route", "message_code"],
+      "properties": {
+        "error_kind": { "type": "string", "enum": ["error", "unhandled_rejection"] },
+        "route": { "type": "string", "minLength": 1 },
+        "message_code": { "type": "string", "maxLength": 120 }
+      },
+      "additionalProperties": false
+    },
+    "api_request_failed": {
+      "classification": "identified_opportunity",
+      "delivery": "stream",
+      "required": ["endpoint", "method", "status"],
+      "properties": {
+        "endpoint": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+        "status": { "type": "integer", "minimum": 0, "maximum": 599 }
+      },
+      "additionalProperties": false
+    },
+    "api_latency_recorded": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["endpoint", "method", "duration_ms", "status"],
+      "properties": {
+        "endpoint": { "type": "string", "minLength": 1 },
+        "method": { "type": "string", "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"] },
+        "duration_ms": { "type": "number", "minimum": 0 },
+        "status": { "type": "integer", "minimum": 0, "maximum": 599 }
+      },
+      "additionalProperties": false
+    },
+    "web_vital_recorded": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["metric", "value", "rating", "route"],
+      "properties": {
+        "metric": { "type": "string", "enum": ["CLS", "FCP", "FID", "INP", "LCP", "TTFB"] },
+        "value": { "type": "number" },
+        "rating": { "type": "string", "enum": ["good", "needs-improvement", "poor"] },
+        "route": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "inventory_validation_failed": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["form", "field", "error_code"],
+      "properties": {
+        "form": { "type": "string", "enum": ["inbound_order", "outbound_order", "stock_adjustment"] },
+        "field": { "type": "string", "minLength": 1 },
+        "error_code": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    },
+    "inventory_flow_abandoned": {
+      "classification": "identified_opportunity",
+      "delivery": "batch",
+      "required": ["form", "stage"],
+      "properties": {
+        "form": { "type": "string", "enum": ["inbound_order", "outbound_order", "stock_adjustment"] },
+        "stage": { "type": "string", "enum": ["started", "details_entered", "submit_failed"] }
+      },
+      "additionalProperties": false
+    }
+  }
+}

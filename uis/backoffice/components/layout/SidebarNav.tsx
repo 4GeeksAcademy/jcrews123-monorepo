@@ -10,6 +10,7 @@ const navItems = [
   { href: "/incidents", label: "Incident Analysis" },
   { href: "/suppliers", label: "Supplier Directory" },
   { href: "/inventory/products", label: "Inventory" },
+  { href: "/telemetry", label: "System Telemetry" },
   { href: "/account/profile", label: "Profile" },
   { href: "/account/change-password", label: "Change password" },
 ];

@@ -74,6 +74,8 @@ def seed_inventory(user_uuid: str | None = None) -> int:
                 ingredient_id=sku_to_id[str(row["sku"])],
                 quantity=row["quantity"],  # type: ignore[arg-type]
                 supplier_name=str(row["supplier_name"]),
+                unit_cost=row["unit_cost"],  # type: ignore[arg-type]
+                currency=str(row["currency"]),
                 location_id=int(row["location_id"]),
                 user_uuid=operator_uuid,
             )
@@ -85,6 +87,9 @@ def seed_inventory(user_uuid: str | None = None) -> int:
                 ingredient_id=sku_to_id[str(row["sku"])],
                 quantity=row["quantity"],  # type: ignore[arg-type]
                 reason=str(row["reason"]),
+                waste_reason=(
+                    str(row["waste_reason"]) if row.get("waste_reason") else None
+                ),
                 location_id=int(row["location_id"]),
                 user_uuid=operator_uuid,
             )

@@ -1,0 +1,61 @@
+{
+  "name": "Brasaland Telemetry Series",
+  "version": "1.0.0",
+  "status": "in_progress",
+  "overview": "Syllabus projects 45-48: telemetry design, frontend capture, Supabase storage, and technical reporting.",
+  "implementationRoot": "docs/telemetry, services/api, services/telemetry, uis/backoffice",
+  "branch": "telemtry",
+  "stack": {
+    "frontend": "Next.js 16, TypeScript, Tailwind CSS",
+    "backend": "FastAPI, Pydantic, SQLModel",
+    "database": "Supabase PostgreSQL",
+    "analysis": "Pandas"
+  },
+  "ports": {
+    "backoffice": 3001,
+    "api": 8000
+  },
+  "phases": {
+    "45_design": "implemented",
+    "46_capture": "implemented",
+    "47_storage": "implementation_complete_remote_migration_pending",
+    "48_report": "implemented"
+  },
+  "deliverables": [
+    "archive/telemetry-series-plan/telemetry-master-plan.md",
+    "archive/telemetry-series-plan/plan-45-design.md",
+    "archive/telemetry-series-plan/plan-46-capture.md",
+    "archive/telemetry-series-plan/plan-47-storage.md",
+    "archive/telemetry-series-plan/plan-48-report.md",
+    "archive/telemetry-series-plan/telemetry-CONTEXT.md",
+    "archive/telemetry-series-plan/WHAT_TELEMETRY_MEANS.md",
+    "archive/telemetry-series-plan/PR_TEST_PLAN.md",
+    "archive/telemetry-series-plan/plan.json",
+    "docs/telemetry/telemetry-plan.md",
+    "docs/telemetry/event-schemas.json",
+    "services/api/migrations/20261012_inventory_telemetry_fields.sql",
+    "services/api/migrations/20261012_create_telemetry_events.sql",
+    "services/api/models/inventory.py",
+    "services/api/schemas/inventory.py",
+    "services/api/schemas/telemetry.py",
+    "services/api/services/inventory.py",
+    "services/api/routers/inventory.py",
+    "services/api/routers/telemetry.py",
+    "services/api/telemetry/contracts.py",
+    "services/api/telemetry/store.py",
+    "services/api/tests/test_inventory_api.py",
+    "services/api/tests/test_telemetry_api.py",
+    "services/api/tests/test_telemetry_analysis.py",
+    "services/telemetry/README.md",
+    "services/telemetry/analysis.py",
+    "uis/backoffice/lib/telemetry.ts",
+    "uis/backoffice/lib/telemetry-api.ts",
+    "uis/backoffice/components/telemetry/TelemetryProvider.tsx",
+    "uis/backoffice/components/telemetry/TelemetryReportPanel.tsx",
+    "uis/backoffice/app/(dashboard)/telemetry/page.tsx",
+    "uis/backoffice/components/inventory/InboundOrderForm.tsx",
+    "uis/backoffice/components/inventory/OutboundOrderForm.tsx",
+    "uis/backoffice/components/inventory/InventoryProductsPanel.tsx",
+    "memory-bank/progress.md"
+  ]
+}

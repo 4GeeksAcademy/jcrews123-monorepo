@@ -16,6 +16,7 @@ import {
   type AuthUser,
 } from "@/lib/auth-api";
 import { getStoredToken } from "@/lib/auth-storage";
+import { setTelemetryUser } from "@/lib/telemetry";
 
 type AuthContextValue = {
   user: AuthUser | null;
@@ -34,6 +35,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const refreshUser = useCallback(async () => {
     const token = getStoredToken();
     if (!token) {
+      setTelemetryUser(null);
       setUser(null);
       setLoading(false);
       return;
@@ -41,9 +43,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     try {
       const currentUser = await fetchCurrentUser();
+      setTelemetryUser(String(currentUser.profile.user_id));
       setUser(currentUser);
     } catch {
       clearSession();
+      setTelemetryUser(null);
       setUser(null);
     } finally {
       setLoading(false);
@@ -56,6 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     async function bootstrapSession() {
       const token = getStoredToken();
       if (!token) {
+        setTelemetryUser(null);
         if (active) {
           setUser(null);
           setLoading(false);
@@ -65,11 +70,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
       try {
         const currentUser = await fetchCurrentUser();
+        setTelemetryUser(String(currentUser.profile.user_id));
         if (active) {
           setUser(currentUser);
         }
       } catch {
         clearSession();
+        setTelemetryUser(null);
         if (active) {
           setUser(null);
         }
@@ -88,6 +95,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const logout = useCallback(() => {
     clearSession();
+    setTelemetryUser(null);
     setUser(null);
     router.replace("/login");
   }, [router]);

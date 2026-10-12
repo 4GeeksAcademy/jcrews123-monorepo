@@ -55,6 +55,7 @@ Register at `/register` or sign in at `/login`. JWT is stored in `localStorage` 
 | `/inventory/orders/inbound` | Register supplier delivery |
 | `/inventory/orders/outbound` | Register consumption or waste exit |
 | `/inventory/orders` | Read-only inbound/outbound order history |
+| `/telemetry` | Technical event volume, error, latency, and authentication report |
 | `/account/profile` | View and edit profile |
 | `/account/change-password` | Change password while signed in |
 
@@ -64,6 +65,7 @@ Register at `/register` or sign in at `/login`. JWT is stored in `localStorage` 
 |----------|---------|---------|
 | `NEXT_PUBLIC_API_URL` | `/backend` | Browser-facing same-origin API prefix |
 | `INTERNAL_API_URL` | `http://localhost:8000` | Next.js proxy destination; Docker uses `http://services:8000` |
+| `NEXT_PUBLIC_TELEMETRY_ENDPOINT` | `/backend/telemetry/events` | Browser-facing telemetry batch receiver |
 
 ## Layout
 
@@ -79,6 +81,7 @@ Slate sidebar + white content area — intentionally distinct from the public am
 | Incident analysis | `services/api` — see [`archive/incidents-file-analyzer-plan/`](../../archive/incidents-file-analyzer-plan/) |
 | Supplier directory | `services/api` — see [`archive/supplier-directory-plan/`](../../archive/supplier-directory-plan/) |
 | Inventory | `services/api` — see [`archive/ms-5-plan/`](../../archive/ms-5-plan/) |
+| Telemetry | `services/api` + `services/telemetry` — see [`archive/telemetry-series-plan/`](../../archive/telemetry-series-plan/) |
 | Password reset | `services/api` + Resend — see [`archive/user-authentication-plan/`](../../archive/user-authentication-plan/) |
 
 ## Verify

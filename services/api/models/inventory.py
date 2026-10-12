@@ -20,6 +20,10 @@ class Ingredient(SQLModel, table=True):
     unit: str
     category: str
     country: str
+    min_stock: Decimal = Field(
+        default=Decimal("10"),
+        sa_column=Column(Numeric(12, 3), nullable=False, server_default="10"),
+    )
 
 
 class IngredientEntry(SQLModel, table=True):
@@ -29,6 +33,10 @@ class IngredientEntry(SQLModel, table=True):
     ingredient_id: int = Field(foreign_key="ingredients.id", index=True)
     quantity: Decimal = Field(sa_column=Column(Numeric(12, 3), nullable=False))
     supplier_name: str
+    unit_cost: Decimal | None = Field(
+        default=None, sa_column=Column(Numeric(14, 2), nullable=True)
+    )
+    currency: str | None = None
     location_id: int = Field(ge=1, le=14)
     created_at: datetime = Field(default_factory=utc_now)
     user_uuid: str = Field(index=True)
@@ -41,6 +49,7 @@ class IngredientExit(SQLModel, table=True):
     ingredient_id: int = Field(foreign_key="ingredients.id", index=True)
     quantity: Decimal = Field(sa_column=Column(Numeric(12, 3), nullable=False))
     reason: str
+    waste_reason: str | None = None
     location_id: int = Field(ge=1, le=14)
     created_at: datetime = Field(default_factory=utc_now)
     user_uuid: str = Field(index=True)
